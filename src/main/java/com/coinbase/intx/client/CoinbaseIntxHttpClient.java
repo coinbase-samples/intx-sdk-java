@@ -865,7 +865,7 @@ public class CoinbaseIntxHttpClient implements CoinbaseIntxApi {
     public static class Builder {
         public final CoinbaseIntxCredentials credentials;
         public HttpClient client;
-        public String baseUrl = "https://api-n5e1.coinbase.com/api/v1";
+        public String baseUrl = "https://api.international.coinbase.com/api/v1";
 
         public Builder(CoinbaseIntxCredentials credentials) {
             this.credentials = credentials;
