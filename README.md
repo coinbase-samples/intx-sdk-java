@@ -1,4 +1,4 @@
-# INTX Java SDK README
+# Coinbase International Exchange (INTX) Java SDK README
 
 ## Overview
 
