@@ -21,16 +21,27 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class CoinbaseIntxCredentials {
+public class CoinbaseCredentials {
+    private static final String HMAC_SHA256 = "HmacSHA256";
+    private static Mac macInstance;
+
     private String accessKey;
     private String passphrase;
     private String signingKey;
     private String portfolioId;
 
-    public CoinbaseIntxCredentials() {
+    static {
+        try {
+            macInstance = Mac.getInstance(HMAC_SHA256);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize HMAC instance", e);
+        }
     }
 
-    public CoinbaseIntxCredentials(Builder builder) {
+    public CoinbaseCredentials() {
+    }
+
+    public CoinbaseCredentials(Builder builder) {
         this.accessKey = builder.accessKey;
         this.passphrase = builder.passphrase;
         this.signingKey = builder.signingKey;
@@ -69,15 +80,16 @@ public class CoinbaseIntxCredentials {
         this.portfolioId = portfolioId;
     }
 
-    public String Sign(Long timestamp, String method, String requestPath, String body) {
+    public String Sign(Long timestamp, String method, String requestPath, String body) throws RuntimeException {
         try {
             String message = timestamp + method + requestPath + (body != null ? body : "");
             byte[] hmacKey = Base64.getDecoder().decode(signingKey);
-            Mac mac = Mac.getInstance("HmacSHA256");
-            mac.init(new SecretKeySpec(hmacKey, "HmacSHA256"));
 
-            byte[] signature = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
-            return Base64.getEncoder().encodeToString(signature);
+            synchronized (macInstance) {
+                macInstance.init(new SecretKeySpec(hmacKey, HMAC_SHA256));
+                byte[] signature = macInstance.doFinal(message.getBytes(StandardCharsets.UTF_8));
+                return Base64.getEncoder().encodeToString(signature);
+            }
         } catch (Exception e) {
             throw new RuntimeException("Failed to generate signature", e);
         }
@@ -101,8 +113,8 @@ public class CoinbaseIntxCredentials {
             return this;
         }
 
-        public CoinbaseIntxCredentials build() {
-            return new CoinbaseIntxCredentials(this);
+        public CoinbaseCredentials build() {
+            return new CoinbaseCredentials(this);
         }
     }
 }

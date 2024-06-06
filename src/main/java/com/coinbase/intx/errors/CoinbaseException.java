@@ -16,25 +16,25 @@
 
 package com.coinbase.intx.errors;
 
-public class CoinbaseIntxException extends RuntimeException {
+public class CoinbaseException extends RuntimeException {
     private final int statusCode;
 
-    public CoinbaseIntxException(int statusCode, String message) {
+    public CoinbaseException(int statusCode, String message) {
         super(message);
         this.statusCode = statusCode;
     }
 
-    public CoinbaseIntxException(String message, Throwable cause) {
+    public CoinbaseException(String message, Throwable cause) {
         super(message, cause);
         this.statusCode = 500;
     }
 
-    public CoinbaseIntxException(int statusCode, String message, Throwable cause) {
+    public CoinbaseException(int statusCode, String message, Throwable cause) {
         super(message, cause);
         this.statusCode = statusCode;
     }
 
-    public CoinbaseIntxException(Throwable cause) {
+    public CoinbaseException(Throwable cause) {
         super(cause);
         this.statusCode = 500;
     }

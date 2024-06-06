@@ -16,8 +16,8 @@
 
 package com.coinbase.intx.client;
 
-import com.coinbase.intx.credentials.CoinbaseIntxCredentials;
-import com.coinbase.intx.errors.CoinbaseIntxException;
+import com.coinbase.intx.credentials.CoinbaseCredentials;
+import com.coinbase.intx.errors.CoinbaseException;
 import com.coinbase.intx.model.feerates.FeeRate;
 import com.coinbase.intx.model.feerates.*;
 import com.coinbase.intx.model.instruments.*;
@@ -36,13 +36,13 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
 import java.util.List;
 
-public class CoinbaseIntxHttpClient implements CoinbaseIntxApi {
+public class CoinbaseHttpClient implements CoinbaseApi {
     private final HttpClient client;
-    private final CoinbaseIntxCredentials credentials;
+    private final CoinbaseCredentials credentials;
     private final String baseUrl;
     private final ObjectMapper mapper;
 
-    public CoinbaseIntxHttpClient(Builder builder) {
+    public CoinbaseHttpClient(Builder builder) {
         this.credentials = builder.credentials;
         this.client = builder.client;
         this.baseUrl = builder.baseUrl;
@@ -841,12 +841,12 @@ public class CoinbaseIntxHttpClient implements CoinbaseIntxApi {
             if (resp.statusCode() != 200) {
                 System.out.println("Request failed with status code: " + resp.statusCode());
                 System.out.println("Response body: " + resp.body());
-                throw new CoinbaseIntxException(resp.statusCode(), resp.body());
+                throw new CoinbaseException(resp.statusCode(), resp.body());
             }
             return resp.body();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-            throw new CoinbaseIntxException("Failed to send request", e);
+            throw new CoinbaseException("Failed to send request", e);
         }
     }
 
@@ -863,11 +863,11 @@ public class CoinbaseIntxHttpClient implements CoinbaseIntxApi {
     }
 
     public static class Builder {
-        public final CoinbaseIntxCredentials credentials;
+        public final CoinbaseCredentials credentials;
         public HttpClient client;
         public String baseUrl = "https://api.international.coinbase.com/api/v1";
 
-        public Builder(CoinbaseIntxCredentials credentials) {
+        public Builder(CoinbaseCredentials credentials) {
             this.credentials = credentials;
         }
 
@@ -881,12 +881,12 @@ public class CoinbaseIntxHttpClient implements CoinbaseIntxApi {
             return this;
         }
 
-        public CoinbaseIntxHttpClient build() throws IllegalStateException {
+        public CoinbaseHttpClient build() throws IllegalStateException {
             validate();
             if (client == null) {
                 client = HttpClient.newBuilder().build();
             }
-            return new CoinbaseIntxHttpClient(this);
+            return new CoinbaseHttpClient(this);
         }
 
         private void validate() throws IllegalStateException {
