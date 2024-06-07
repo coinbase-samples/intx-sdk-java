@@ -37,7 +37,6 @@ public class Aggregation {
     @JsonProperty("volume")
     private String volume;
 
-    // Constructors, getters, and setters
     public Aggregation() {}
 
     private Aggregation(Builder builder) {
