@@ -54,7 +54,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request) {
+    public ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request) throws CoinbaseException {
         String path = "/portfolios";
         String response = get(path, "");
 
@@ -70,7 +70,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetPortfolioResponse getPortfolio(GetPortfolioRequest request) {
+    public GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s", request.getPortfolioId());
         String response = get(path, "");
 
@@ -86,7 +86,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public CreatePortfolioResponse createPortfolio(CreatePortfolioRequest request) {
+    public CreatePortfolioResponse createPortfolio(CreatePortfolioRequest request) throws CoinbaseException {
         String path = "/portfolios";
         String response = post(path, "", request);
 
@@ -102,7 +102,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public PatchPortfolioResponse patchPortfolio(PatchPortfolioRequest request) {
+    public PatchPortfolioResponse patchPortfolio(PatchPortfolioRequest request) throws CoinbaseException {
         String path = "/portfolios";
         String response = patch(path, "", request);
 
@@ -119,7 +119,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
 
 
     @Override
-    public UpdatePortfolioResponse updatePortfolio(String portfolioId, UpdatePortfolioRequest request) {
+    public UpdatePortfolioResponse updatePortfolio(String portfolioId, UpdatePortfolioRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s", portfolioId);
         String response = put(path, "", request);
 
@@ -135,7 +135,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetPortfolioDetailResponse getPortfolioDetail(GetPortfolioDetailRequest request) {
+    public GetPortfolioDetailResponse getPortfolioDetail(GetPortfolioDetailRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s/detail", request.getPortfolio());
         String response = get(path, "");
 
@@ -151,7 +151,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetPortfolioSummaryResponse getPortfolioSummary(GetPortfolioSummaryRequest request) {
+    public GetPortfolioSummaryResponse getPortfolioSummary(GetPortfolioSummaryRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s/detail", request.getPortfolio());
         String response = get(path, "");
 
@@ -167,7 +167,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) {
+    public ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s/balances", request.getPortfolio());
         String response = get(path, "");
 
@@ -183,7 +183,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetBalanceForPortfolioAssetResponse getBalanceForPortfolioAsset(GetBalanceForPortfolioAssetRequest request) {
+    public GetBalanceForPortfolioAssetResponse getBalanceForPortfolioAsset(GetBalanceForPortfolioAssetRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s/balances/%s", request.getPortfolio(), request.getAsset());
         String response = get(path, "");
 
@@ -199,7 +199,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListPortfolioPositionsResponse listPortfolioPositions(ListPortfolioPositionsRequest request) {
+    public ListPortfolioPositionsResponse listPortfolioPositions(ListPortfolioPositionsRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s/positions", request.getPortfolio());
         String response = get(path, "");
 
@@ -215,7 +215,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetPositionForPortfolioInstrumentResponse getPositionForPortfolioInstrument(GetPositionForPortfolioInstrumentRequest request) {
+    public GetPositionForPortfolioInstrumentResponse getPositionForPortfolioInstrument(GetPositionForPortfolioInstrumentRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s/positions/%s", request.getPortfolio(), request.getInstrument());
         String response = get(path, "");
 
@@ -231,7 +231,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListFillsByPortfoliosResponse listFillsByPortfolios(ListFillsByPortfoliosRequest request) {
+    public ListFillsByPortfoliosResponse listFillsByPortfolios(ListFillsByPortfoliosRequest request) throws CoinbaseException {
         String path = "/portfolios/fills";
         String response = get(path + "?" + request.getQueryString(), "");
 
@@ -248,7 +248,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) {
+    public ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s/fills", request.getPortfolio());
         String response = get(path + "?" + request.getQueryString(), "");
 
@@ -265,7 +265,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public EnableDisableCrossCollateralResponse enableDisableCrossCollateral(EnableDisableCrossCollateralRequest request) {
+    public EnableDisableCrossCollateralResponse enableDisableCrossCollateral(EnableDisableCrossCollateralRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s/cross-collateral-enabled", request.getPortfolio());
         String response = post(path, "", request);
 
@@ -281,7 +281,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public EnableDisableAutoMarginResponse enableDisableAutoMargin(EnableDisableAutoMarginRequest request) {
+    public EnableDisableAutoMarginResponse enableDisableAutoMargin(EnableDisableAutoMarginRequest request) throws CoinbaseException {
         String path = String.format("/portfolios/%s/auto-margin-enabled", request.getPortfolio());
         String response = post(path, "", request);
 
@@ -297,7 +297,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public SetPortfolioMarginOverrideResponse setPortfolioMarginOverride(SetPortfolioMarginOverrideRequest request) {
+    public SetPortfolioMarginOverrideResponse setPortfolioMarginOverride(SetPortfolioMarginOverrideRequest request) throws CoinbaseException {
         String path = "/portfolios/margin";
         String response = post(path, "", request);
 
@@ -314,7 +314,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public TransferFundsResponse transferFunds(TransferFundsRequest request) {
+    public TransferFundsResponse transferFunds(TransferFundsRequest request) throws CoinbaseException {
         String path = "/portfolios/transfer";
         String response = post(path, "", request);
 
@@ -330,7 +330,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public TransferPositionsResponse transferPositions(TransferPositionsRequest request) {
+    public TransferPositionsResponse transferPositions(TransferPositionsRequest request) throws CoinbaseException {
         String path = "/portfolios/transfer-position";
         String response = post(path, "", request);
 
@@ -346,7 +346,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListPortfolioFeeRatesResponse listPortfolioFeeRates(ListPortfolioFeeRatesRequest request) {
+    public ListPortfolioFeeRatesResponse listPortfolioFeeRates(ListPortfolioFeeRatesRequest request) throws CoinbaseException {
         String path = "/portfolios/fee-rates";
         String response = get(path, "");
 
@@ -362,7 +362,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListAssetsResponse listAssets(ListAssetsRequest request) {
+    public ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbaseException {
         String path = "/assets";
         String response = get(path, "");
 
@@ -378,7 +378,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListInstrumentsResponse listInstruments(ListInstrumentsRequest request) {
+    public ListInstrumentsResponse listInstruments(ListInstrumentsRequest request) throws CoinbaseException {
         String path = "/instruments";
         String response = get(path, "");
 
@@ -394,7 +394,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetAssetResponse getAsset(GetAssetRequest request) {
+    public GetAssetResponse getAsset(GetAssetRequest request) throws CoinbaseException {
         String path = String.format("/assets/%s", request.getAssetId());
         String response = get(path, "");
 
@@ -410,7 +410,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetSupportedNetworksResponse getSupportedNetworks(GetSupportedNetworksRequest request) {
+    public GetSupportedNetworksResponse getSupportedNetworks(GetSupportedNetworksRequest request) throws CoinbaseException {
         String path = String.format("/assets/%s/networks", request.getAsset());
         String response = get(path, "");
 
@@ -426,7 +426,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetInstrumentResponse getInstrument(GetInstrumentRequest request) {
+    public GetInstrumentResponse getInstrument(GetInstrumentRequest request) throws CoinbaseException {
         String path = String.format("/instruments/%s/quote", request.getInstrumentId());
         String response = get(path, "");
 
@@ -442,7 +442,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetInstrumentQuoteResponse getInstrumentQuote(GetInstrumentQuoteRequest request) {
+    public GetInstrumentQuoteResponse getInstrumentQuote(GetInstrumentQuoteRequest request) throws CoinbaseException {
         String path = String.format("/instruments/%s/quote", request.getInstrument());
         String response = get(path, "");
 
@@ -458,7 +458,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetDailyTradingVolumesResponse getDailyTradingVolumes(GetDailyTradingVolumesRequest request) {
+    public GetDailyTradingVolumesResponse getDailyTradingVolumes(GetDailyTradingVolumesRequest request) throws CoinbaseException {
         String path = String.format("/instruments/volumes/daily");
         String response = get(path, request.getQueryString());
 
@@ -474,7 +474,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetAggregatedCandlesResponse getAggregatedCandles(GetAggregatedCandlesRequest request) {
+    public GetAggregatedCandlesResponse getAggregatedCandles(GetAggregatedCandlesRequest request) throws CoinbaseException {
         String path = String.format("/instruments/%s/candles", request.getInstrument());
         String response = get(path, request.getQueryString());
 
@@ -490,7 +490,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetHistoricalFundingRatesResponse getHistoricalFundingRates(GetHistoricalFundingRatesRequest request) {
+    public GetHistoricalFundingRatesResponse getHistoricalFundingRates(GetHistoricalFundingRatesRequest request) throws CoinbaseException {
         String url = String.format("/instruments/%s/funding", request.getInstrument());
         String response = get(url, request.getQueryString());
 
@@ -506,7 +506,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public CreateOrderResponse createOrder(CreateOrderRequest request) {
+    public CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbaseException {
         String path = "/orders";
         String response = post(path, "", request);
 
@@ -521,7 +521,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public CancelOrderResponse cancelOrder(CancelOrderRequest request) {
+    public CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbaseException {
         String path = String.format("/orders/%s", request.getId());
         String response = delete(path + "?portfolio=" + request.getPortfolio(), "", request);
 
@@ -536,7 +536,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public CancelOrdersResponse cancelOrders(CancelOrdersRequest request) {
+    public CancelOrdersResponse cancelOrders(CancelOrdersRequest request) throws CoinbaseException {
         String path = "/orders";
         String response = delete(path, "", request);
 
@@ -551,7 +551,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetOrderResponse getOrder(GetOrderRequest request) {
+    public GetOrderResponse getOrder(GetOrderRequest request) throws CoinbaseException {
         String path = String.format("/orders/%s", request.getId());
         String response = get(path + "?portfolio=" + request.getPortfolio(), "");
 
@@ -566,7 +566,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ModifyOrderResponse modifyOrder(ModifyOrderRequest request) {
+    public ModifyOrderResponse modifyOrder(ModifyOrderRequest request) throws CoinbaseException {
         String path = String.format("/orders/%s", request.getId());
         String response = put(path, "", request);
 
@@ -581,7 +581,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListOrdersResponse listOrders(ListOrdersRequest request) {
+    public ListOrdersResponse listOrders(ListOrdersRequest request) throws CoinbaseException {
         String path = "/orders";
         String response = get(path + "?" + request.getQueryString(), "");
 
@@ -597,7 +597,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListFeeRateTiersResponse listFeeRateTiers(ListFeeRateTiersRequest request) {
+    public ListFeeRateTiersResponse listFeeRateTiers(ListFeeRateTiersRequest request) throws CoinbaseException {
         String path = "/fee-rate-tiers";
         String response = get(path, "");
 
@@ -612,7 +612,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ListTransfersResponse listTransfers(ListTransfersRequest request) {
+    public ListTransfersResponse listTransfers(ListTransfersRequest request) throws CoinbaseException {
         String path = "/transfers";
         String response = get(path + "?" + request.getQueryString(), "");
 
@@ -628,7 +628,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public GetTransferResponse getTransfer(GetTransferRequest request) {
+    public GetTransferResponse getTransfer(GetTransferRequest request) throws CoinbaseException {
         String path = String.format("/transfers/%s", request.getTransferUuid());
         String response = get(path, "");
 
@@ -643,7 +643,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public WithdrawToCryptoAddressResponse withdrawToCryptoAddress(WithdrawToCryptoAddressRequest request) {
+    public WithdrawToCryptoAddressResponse withdrawToCryptoAddress(WithdrawToCryptoAddressRequest request) throws CoinbaseException {
         String path = "/transfers/withdraw";
         String response = post(path, "", request);
 
@@ -658,7 +658,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public CreateCryptoAddressResponse createCryptoAddress(CreateCryptoAddressRequest request) {
+    public CreateCryptoAddressResponse createCryptoAddress(CreateCryptoAddressRequest request) throws CoinbaseException {
         String path = "/transfers/address";
         String response = post(path, "", request);
 
@@ -673,7 +673,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public CreateCounterpartyIdResponse createCounterpartyId(CreateCounterpartyIdRequest request) {
+    public CreateCounterpartyIdResponse createCounterpartyId(CreateCounterpartyIdRequest request) throws CoinbaseException {
         String path = "/transfers/create-counterparty-id";
         String response = post(path, "", request);
 
@@ -688,7 +688,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public ValidateCounterpartyIdResponse validateCounterpartyId(ValidateCounterpartyIdRequest request) {
+    public ValidateCounterpartyIdResponse validateCounterpartyId(ValidateCounterpartyIdRequest request) throws CoinbaseException {
         String path = "/transfers/validate-counterparty-id";
         String response = post(path, "", request);
 
@@ -704,7 +704,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
     @Override
-    public WithdrawToCounterpartyIdResponse withdrawToCounterpartyId(WithdrawToCounterpartyIdRequest request) {
+    public WithdrawToCounterpartyIdResponse withdrawToCounterpartyId(WithdrawToCounterpartyIdRequest request) throws CoinbaseException {
         String path = "/transfers/withdraw/counterparty";
         String response = post(path, "", request);
 
@@ -723,7 +723,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
         }
     }
 
-    private String get(String path, String query) {
+    private String get(String path, String query) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "GET", null);
         if (builder == null) {
             throw new CoinbaseException("Failed to generate HTTP request");
@@ -733,7 +733,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
         return sendRequest(httpRequest);
     }
 
-    private String post(String path, String query, Object requestBody) {
+    private String post(String path, String query, Object requestBody) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "POST", requestBody);
         if (builder == null) {
             throw new CoinbaseException("Failed to generate HTTP request for POST");
@@ -743,7 +743,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
         return sendRequest(httpRequest);
     }
 
-    private String put(String path, String query, Object requestBody) {
+    private String put(String path, String query, Object requestBody) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "PUT", requestBody);
         if (builder == null) {
             throw new CoinbaseException("Failed to generate HTTP request for PUT");
@@ -753,7 +753,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
         return sendRequest(httpRequest);
     }
 
-    private String delete(String path, String query, Object requestBody) {
+    private String delete(String path, String query, Object requestBody) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "DELETE", null);
         if (builder == null) {
             throw new CoinbaseException("Failed to generate HTTP request for DELETE");
@@ -763,7 +763,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
         return sendRequest(httpRequest);
     }
 
-    private String patch(String path, String query, Object requestBody) {
+    private String patch(String path, String query, Object requestBody) throws CoinbaseException {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "PATCH", requestBody);
         if (builder == null) {
             throw new CoinbaseException("Failed to generate HTTP request for PATCH");
@@ -774,7 +774,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     }
 
 
-    private HttpRequest.Builder generateHttpRequest(String path, String query, String method, Object requestBody) {
+    private HttpRequest.Builder generateHttpRequest(String path, String query, String method, Object requestBody) throws CoinbaseException {
         String callUrl = baseUrl + path + query;
         URI uri = URI.create(callUrl);
         long unixTimestamp = Instant.now().getEpochSecond();
@@ -794,7 +794,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                 .header(Constants.CONTENT_TYPE_HEADER, Constants.CONTENT_TYPE_JSON);
     }
 
-    private String sendRequest(HttpRequest request) {
+    private String sendRequest(HttpRequest request) throws CoinbaseException {
         try {
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (resp.statusCode() != 200) {
@@ -811,7 +811,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
         }
     }
 
-    private String toJson(Object obj) {
+    private String toJson(Object obj) throws RuntimeException {
         try {
             return mapper.writeValueAsString(obj);
         } catch (IOException e) {
