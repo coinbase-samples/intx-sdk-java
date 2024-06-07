@@ -85,15 +85,15 @@ public class CoinbaseCredentials {
             String message = timestamp + method + requestPath + (body != null ? body : "");
             byte[] hmacKey = Base64.getDecoder().decode(signingKey);
 
-            synchronized (macInstance) {
-                macInstance.init(new SecretKeySpec(hmacKey, HMAC_SHA256));
-                byte[] signature = macInstance.doFinal(message.getBytes(StandardCharsets.UTF_8));
-                return Base64.getEncoder().encodeToString(signature);
-            }
+            Mac mac = (Mac) macInstance.clone();
+            mac.init(new SecretKeySpec(hmacKey, HMAC_SHA256));
+            byte[] signature = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(signature);
         } catch (Exception e) {
             throw new RuntimeException("Failed to generate signature", e);
         }
     }
+
 
     public static class Builder {
         private final String accessKey;
