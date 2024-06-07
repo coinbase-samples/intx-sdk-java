@@ -16,14 +16,16 @@
 
 package com.coinbase.intx.credentials;
 
+import com.coinbase.intx.utils.Constants;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class CoinbaseCredentials {
-    private static final String HMAC_SHA256 = "HmacSHA256";
-    private static Mac macInstance;
+    private static final String HMAC_SHA256 = Constants.HMAC_SHA256;
+    private final Mac macInstance;
 
     private String accessKey;
     private String passphrase;
@@ -31,11 +33,7 @@ public class CoinbaseCredentials {
     private String portfolioId;
 
     public CoinbaseCredentials() {
-        try {
-            this.macInstance = Mac.getInstance(HMAC_SHA256);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to initialize HMAC instance", e);
-        }
+        this.macInstance = initializeMacInstance();
     }
 
     public CoinbaseCredentials(Builder builder) {
@@ -43,10 +41,13 @@ public class CoinbaseCredentials {
         this.passphrase = builder.passphrase;
         this.signingKey = builder.signingKey;
         this.portfolioId = builder.portfolioId;
+        this.macInstance = initializeMacInstance();
+    }
 
+    private Mac initializeMacInstance() {
         try {
-            this.macInstance = Mac.getInstance(HMAC_SHA256);
-        } catch (Exception e) {
+            return Mac.getInstance(HMAC_SHA256);
+        } catch (Throwable e) {
             throw new RuntimeException("Failed to initialize HMAC instance", e);
         }
     }
@@ -83,16 +84,16 @@ public class CoinbaseCredentials {
         this.portfolioId = portfolioId;
     }
 
-    public String Sign(Long timestamp, String method, String requestPath, String body) throws RuntimeException {
+    public String Sign(long timestamp, String method, String requestPath, String body) throws RuntimeException {
         try {
-            String message = timestamp + method + requestPath + (body != null ? body : "");
+            String message = String.format("%d%s%s%s", timestamp, method, requestPath, (body != null ? body : ""));
             byte[] hmacKey = Base64.getDecoder().decode(signingKey);
 
             Mac mac = (Mac) macInstance.clone();
             mac.init(new SecretKeySpec(hmacKey, HMAC_SHA256));
             byte[] signature = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(signature);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             throw new RuntimeException("Failed to generate signature", e);
         }
     }

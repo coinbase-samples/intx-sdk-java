@@ -23,7 +23,7 @@ import com.coinbase.intx.client.CoinbaseHttpClient;
 import com.coinbase.intx.credentials.CoinbaseCredentials;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CoinbaseException {
         String credsStringBlob = System.getenv("INTX_CREDENTIALS");
         ObjectMapper mapper = new ObjectMapper();
 
@@ -39,7 +39,7 @@ public class Main {
             System.out.println("List Portfolios Response:");
             System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(listResponse));
 
-        } catch (Exception e) {
+        } catch (Throwable e) {
             throw new CoinbaseException("Failed to retrieve the list portfolios response", e);
         }
     }

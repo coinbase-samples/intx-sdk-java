@@ -14,27 +14,7 @@ The application and code are only available for demonstration purposes.
 ## Usage
 
 To use the *INTX Java SDK*, initialize the Credentials class and create a new client. The Credentials struct is JSON
-enabled. Ensure that INTX API credentials are stored in a secure manner.
-
-
-```java
-public class Main {
-    public static void main(String[] args) {
-        String credsStringBlob = System.getenv("INTX_CREDENTIALS");
-        ObjectMapper mapper = new ObjectMapper();
-
-        try {
-            CoinbaseIntxCredentials credentials = mapper.readValue(credsStringBlob, CoinbaseIntxCredentials.class);
-            CoinbaseIntxHttpClient client = new CoinbaseIntxHttpClient.Builder(credentials)
-                    .withClient(HttpClient.newHttpClient())
-                    .build();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-}
-```
+enabled. See an example of this inside of the [examples package](https://github.com/coinbase-samples/intx-sdk-java/blob/main/src/main/java/com/coinbase/examples/Main.java). Ensure that INTX API credentials are stored in a secure manner.
 
 The JSON format expected for `INTX_CREDENTIALS` is:
 
