@@ -16,6 +16,7 @@
 
 package com.coinbase.examples;
 
+import com.coinbase.intx.errors.CoinbaseException;
 import com.coinbase.intx.model.portfolios.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.coinbase.intx.client.CoinbaseHttpClient;
@@ -39,7 +40,7 @@ public class Main {
             System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(listResponse));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new CoinbaseException("Failed to retrieve the list portfolios response", e);
         }
     }
 }

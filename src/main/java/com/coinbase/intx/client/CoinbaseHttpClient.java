@@ -18,6 +18,7 @@ package com.coinbase.intx.client;
 
 import com.coinbase.intx.credentials.CoinbaseCredentials;
 import com.coinbase.intx.errors.CoinbaseException;
+import com.coinbase.intx.errors.ErrorResponse;
 import com.coinbase.intx.model.feerates.FeeRate;
 import com.coinbase.intx.model.feerates.*;
 import com.coinbase.intx.model.instruments.*;
@@ -25,6 +26,7 @@ import com.coinbase.intx.model.orders.*;
 import com.coinbase.intx.model.portfolios.*;
 import com.coinbase.intx.model.assets.*;
 import com.coinbase.intx.model.transfers.*;
+import com.coinbase.intx.utils.Constants;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -34,6 +36,7 @@ import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpClient;
+import java.time.Instant;
 import java.util.List;
 
 public class CoinbaseHttpClient implements CoinbaseApi {
@@ -62,8 +65,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list portfolios response", e);
         }
     }
 
@@ -79,8 +81,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get portfolio response", e);
         }
     }
 
@@ -96,8 +97,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the create portfolio response", e);
         }
     }
 
@@ -113,8 +113,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the patch portfolio response", e);
         }
     }
 
@@ -131,8 +130,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the update portfolio response", e);
         }
     }
 
@@ -148,8 +146,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get portfolio detail response", e);
         }
     }
 
@@ -165,8 +162,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get portfolio summary response", e);
         }
     }
 
@@ -182,8 +178,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list portfolio balances response", e);
         }
     }
 
@@ -199,8 +194,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get balance for portfolio asset response", e);
         }
     }
 
@@ -216,8 +210,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list portfolio positions response", e);
         }
     }
 
@@ -233,8 +226,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get position for portfolio instrument response", e);
         }
     }
 
@@ -251,8 +243,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list fills by portfolios response", e);
         }
     }
 
@@ -269,8 +260,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list portfolio fills response", e);
         }
     }
 
@@ -286,8 +276,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the enable/disable cross collateral response", e);
         }
     }
 
@@ -303,8 +292,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the enable/disable auto margin response", e);
         }
     }
 
@@ -321,8 +309,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the set portfolio margin override response", e);
         }
     }
 
@@ -338,8 +325,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the transfer funds response", e);
         }
     }
 
@@ -355,8 +341,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the transfer positions response", e);
         }
     }
 
@@ -372,8 +357,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list portfolio fee rates response", e);
         }
     }
 
@@ -389,8 +373,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list assets response", e);
         }
     }
 
@@ -406,8 +389,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list instruments response", e);
         }
     }
 
@@ -423,8 +405,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get asset response", e);
         }
     }
 
@@ -440,8 +421,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get supported networks response", e);
         }
     }
 
@@ -457,8 +437,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get instrument response", e);
         }
     }
 
@@ -474,8 +453,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get instrument quote response", e);
         }
     }
 
@@ -491,8 +469,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get daily trading volumes response", e);
         }
     }
 
@@ -508,8 +485,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .request(request)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get aggregated candles response", e);
         }
     }
 
@@ -525,8 +501,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .results(responseObj.getResults())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get historical funding rates response", e);
         }
     }
 
@@ -541,8 +516,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .order(order)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the create order response", e);
         }
     }
 
@@ -557,8 +531,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .order(order)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the cancel order response", e);
         }
     }
 
@@ -573,8 +546,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .results(responseObj.getResults())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the cancel orders response", e);
         }
     }
 
@@ -589,8 +561,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .order(order)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get order response", e);
         }
     }
 
@@ -605,8 +576,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .order(order)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the modify order response", e);
         }
     }
 
@@ -622,8 +592,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .results(responseObj.getResults())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list orders response", e);
         }
     }
 
@@ -638,8 +607,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .results(feeRates)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list fee rate tiers response", e);
         }
     }
 
@@ -655,8 +623,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .results(responseObj.getResults())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the list transfers response", e);
         }
     }
 
@@ -671,8 +638,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .transfer(transfer)
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the get transfer response", e);
         }
     }
 
@@ -687,8 +653,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .idem(responseObj.getIdem())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the withdraw to crypto address response", e);
         }
     }
 
@@ -703,8 +668,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .cryptoAddress(responseObj.getCryptoAddress())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the create crypto address response", e);
         }
     }
 
@@ -719,8 +683,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .counterparty(responseObj.getCounterparty())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the create counterparty id response", e);
         }
     }
 
@@ -736,8 +699,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .valid(responseObj.isValid())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the validate counterparty id response", e);
         }
     }
 
@@ -757,15 +719,14 @@ public class CoinbaseHttpClient implements CoinbaseApi {
                     .amount(responseObj.getAmount())
                     .build();
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            throw new CoinbaseException("Failed to retrieve the withdraw to counterparty id response", e);
         }
     }
 
     private String get(String path, String query) {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "GET", null);
         if (builder == null) {
-            return null;
+            throw new CoinbaseException("Failed to generate HTTP request");
         }
 
         HttpRequest httpRequest = builder.GET().build();
@@ -775,7 +736,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     private String post(String path, String query, Object requestBody) {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "POST", requestBody);
         if (builder == null) {
-            return null;
+            throw new CoinbaseException("Failed to generate HTTP request for POST");
         }
 
         HttpRequest httpRequest = builder.POST(HttpRequest.BodyPublishers.ofString(toJson(requestBody))).build();
@@ -785,7 +746,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     private String put(String path, String query, Object requestBody) {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "PUT", requestBody);
         if (builder == null) {
-            return null;
+            throw new CoinbaseException("Failed to generate HTTP request for PUT");
         }
 
         HttpRequest httpRequest = builder.PUT(HttpRequest.BodyPublishers.ofString(toJson(requestBody))).build();
@@ -795,7 +756,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     private String delete(String path, String query, Object requestBody) {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "DELETE", null);
         if (builder == null) {
-            return null;
+            throw new CoinbaseException("Failed to generate HTTP request for DELETE");
         }
 
         HttpRequest httpRequest = builder.DELETE().build();
@@ -805,47 +766,47 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     private String patch(String path, String query, Object requestBody) {
         HttpRequest.Builder builder = generateHttpRequest(path, query, "PATCH", requestBody);
         if (builder == null) {
-            return null;
+            throw new CoinbaseException("Failed to generate HTTP request for PATCH");
         }
 
         HttpRequest httpRequest = builder.method("PATCH", HttpRequest.BodyPublishers.ofString(toJson(requestBody))).build();
         return sendRequest(httpRequest);
     }
 
+
     private HttpRequest.Builder generateHttpRequest(String path, String query, String method, Object requestBody) {
         String callUrl = baseUrl + path + query;
-        System.out.println("URL: " + callUrl);
-
         URI uri = URI.create(callUrl);
-        long unixTime = System.currentTimeMillis() / 1000L;
+        long unixTimestamp = Instant.now().getEpochSecond();
         String signature;
         try {
-            signature = credentials.Sign(unixTime, method, uri.getPath(), requestBody != null ? toJson(requestBody) : "");
+            signature = credentials.Sign(unixTimestamp, method, uri.getPath(), requestBody != null ? toJson(requestBody) : "");
         } catch (Exception e) {
-            System.err.println("Failed to generate request signature: " + e.getMessage());
-            return null;
+            throw new CoinbaseException("Failed to generate request signature", e);
         }
 
         return HttpRequest.newBuilder()
                 .uri(uri)
-                .header("CB-ACCESS-KEY", credentials.getAccessKey())
-                .header("CB-ACCESS-PASSPHRASE", credentials.getPassphrase())
-                .header("CB-ACCESS-SIGN", signature)
-                .header("CB-ACCESS-TIMESTAMP", String.valueOf(unixTime))
-                .header("Content-Type", "application/json");
+                .header(Constants.ACCESS_KEY_HEADER, credentials.getAccessKey())
+                .header(Constants.PASSPHRASE_HEADER, credentials.getPassphrase())
+                .header(Constants.SIGNATURE_HEADER, signature)
+                .header(Constants.TIMESTAMP_HEADER, String.valueOf(unixTimestamp))
+                .header(Constants.CONTENT_TYPE_HEADER, Constants.CONTENT_TYPE_JSON);
     }
 
     private String sendRequest(HttpRequest request) {
         try {
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (resp.statusCode() != 200) {
-                System.out.println("Request failed with status code: " + resp.statusCode());
-                System.out.println("Response body: " + resp.body());
-                throw new CoinbaseException(resp.statusCode(), resp.body());
+                try {
+                    ErrorResponse errorResponse = mapper.readValue(resp.body(), ErrorResponse.class);
+                    throw new CoinbaseException(resp.statusCode(), errorResponse.getMessage());
+                } catch (IOException e) {
+                    throw new CoinbaseException(resp.statusCode(), resp.body());
+                }
             }
             return resp.body();
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
             throw new CoinbaseException("Failed to send request", e);
         }
     }
@@ -865,7 +826,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     public static class Builder {
         public final CoinbaseCredentials credentials;
         public HttpClient client;
-        public String baseUrl = "https://api.international.coinbase.com/api/v1";
+        public String baseUrl = Constants.BASE_URL;
 
         public Builder(CoinbaseCredentials credentials) {
             this.credentials = credentials;
@@ -895,4 +856,5 @@ public class CoinbaseHttpClient implements CoinbaseApi {
             }
         }
     }
+
 }

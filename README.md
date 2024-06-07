@@ -43,7 +43,7 @@ The JSON format expected for `INTX_CREDENTIALS` is:
   "accessKey": "",
   "passphrase": "",
   "signingKey": "",
-  "portfolioId": "",
+  "portfolioId": ""
 }
 ```
 

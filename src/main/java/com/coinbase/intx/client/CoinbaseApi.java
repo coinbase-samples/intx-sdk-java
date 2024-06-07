@@ -25,47 +25,33 @@ import com.coinbase.intx.model.portfolios.*;
 import com.coinbase.intx.model.transfers.*;
 
 public interface CoinbaseApi {
+    // Portfolios
     ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request);
     GetPortfolioResponse getPortfolio(GetPortfolioRequest request);
-
     CreatePortfolioResponse createPortfolio(CreatePortfolioRequest request);
-
     PatchPortfolioResponse patchPortfolio(PatchPortfolioRequest request);
-
     UpdatePortfolioResponse updatePortfolio(String portfolioId, UpdatePortfolioRequest request);
-
     GetPortfolioDetailResponse getPortfolioDetail(GetPortfolioDetailRequest request);
-
     GetPortfolioSummaryResponse getPortfolioSummary(GetPortfolioSummaryRequest request);
-
     ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request);
-
     GetBalanceForPortfolioAssetResponse getBalanceForPortfolioAsset(GetBalanceForPortfolioAssetRequest request);
-
     ListPortfolioPositionsResponse listPortfolioPositions(ListPortfolioPositionsRequest request);
-
     GetPositionForPortfolioInstrumentResponse getPositionForPortfolioInstrument(GetPositionForPortfolioInstrumentRequest request);
-
     ListFillsByPortfoliosResponse listFillsByPortfolios(ListFillsByPortfoliosRequest request);
-
     ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request);
-
     EnableDisableCrossCollateralResponse enableDisableCrossCollateral(EnableDisableCrossCollateralRequest request);
-
     EnableDisableAutoMarginResponse enableDisableAutoMargin(EnableDisableAutoMarginRequest request);
-
     SetPortfolioMarginOverrideResponse setPortfolioMarginOverride(SetPortfolioMarginOverrideRequest request);
-
     TransferFundsResponse transferFunds(TransferFundsRequest request);
-
     TransferPositionsResponse transferPositions(TransferPositionsRequest request);
-
     ListPortfolioFeeRatesResponse listPortfolioFeeRates(ListPortfolioFeeRatesRequest request);
 
+    // Assets
     ListAssetsResponse listAssets(ListAssetsRequest request);
     GetAssetResponse getAsset(GetAssetRequest request);
     GetSupportedNetworksResponse getSupportedNetworks(GetSupportedNetworksRequest request);
 
+    // Instruments
     ListInstrumentsResponse listInstruments(ListInstrumentsRequest request);
     GetInstrumentResponse getInstrument(GetInstrumentRequest request);
     GetInstrumentQuoteResponse getInstrumentQuote(GetInstrumentQuoteRequest request);
@@ -73,6 +59,7 @@ public interface CoinbaseApi {
     GetAggregatedCandlesResponse getAggregatedCandles(GetAggregatedCandlesRequest request);
     GetHistoricalFundingRatesResponse getHistoricalFundingRates(GetHistoricalFundingRatesRequest request);
 
+    // Orders
     CreateOrderResponse createOrder(CreateOrderRequest request);
     CancelOrderResponse cancelOrder(CancelOrderRequest request);
     CancelOrdersResponse cancelOrders(CancelOrdersRequest request);
@@ -80,19 +67,15 @@ public interface CoinbaseApi {
     ModifyOrderResponse modifyOrder(ModifyOrderRequest request);
     ListOrdersResponse listOrders(ListOrdersRequest request);
 
+    // Fee Rates
     ListFeeRateTiersResponse listFeeRateTiers(ListFeeRateTiersRequest request);
 
+    // Transfers
     ListTransfersResponse listTransfers(ListTransfersRequest request);
-
     GetTransferResponse getTransfer(GetTransferRequest request);
-
     WithdrawToCryptoAddressResponse withdrawToCryptoAddress(WithdrawToCryptoAddressRequest request);
-
     CreateCryptoAddressResponse createCryptoAddress(CreateCryptoAddressRequest request);
-
     CreateCounterpartyIdResponse createCounterpartyId(CreateCounterpartyIdRequest request);
-
     ValidateCounterpartyIdResponse validateCounterpartyId(ValidateCounterpartyIdRequest request);
-
     WithdrawToCounterpartyIdResponse withdrawToCounterpartyId(WithdrawToCounterpartyIdRequest request);
 }

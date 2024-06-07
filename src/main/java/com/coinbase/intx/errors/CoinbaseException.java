@@ -38,5 +38,14 @@ public class CoinbaseException extends RuntimeException {
         super(cause);
         this.statusCode = 500;
     }
+
+    public CoinbaseException(String message) {
+        super(message);
+        this.statusCode = 500;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
 }
 
