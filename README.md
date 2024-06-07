@@ -54,15 +54,7 @@ pass in the request object, check for an error, and if nil, process the response
 
 The client and request objects use the builder pattern, which provides a flexible way to construct objects with optional parameters. For example, in the [list portfolio balances](https://docs.cdp.coinbase.com/intx/reference/getportfoliobalances/) request, you can set only the parameters you need using the builder. 
 
-To make API calls, create a request object using the builder pattern, call the desired method on the client with the request object and then process and print the response.
-
-```
-ListPortfolioBalancesRequest listReq = new ListPortfolioBalancesRequest.Builder()
-        .portfolio("portfolio_id")
-        .build();
-ListPortfolioBalancesResponse listResponse = client.listPortfolioBalances(listReq);
-System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(listResponse));
-```
+To make API calls, create a request object using the builder pattern, call the desired method on the client with the request object and then process and print the response. See an example of this inside of the [examples package](https://github.com/coinbase-samples/intx-sdk-java/blob/main/src/main/java/com/coinbase/examples/Main.java).
 
 ## Build
 
