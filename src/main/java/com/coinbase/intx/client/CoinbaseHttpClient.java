@@ -797,19 +797,23 @@ public class CoinbaseHttpClient implements CoinbaseApi {
     private String sendRequest(HttpRequest request) throws CoinbaseException {
         try {
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
-            if (resp.statusCode() != 200) {
+            int statusCode = resp.statusCode();
+
+            if (statusCode >= 200 && statusCode < 300) {
+                return resp.body();
+            } else {
                 try {
                     ErrorResponse errorResponse = mapper.readValue(resp.body(), ErrorResponse.class);
-                    throw new CoinbaseException(resp.statusCode(), errorResponse.getMessage());
+                    throw new CoinbaseException(statusCode, errorResponse.getMessage());
                 } catch (IOException e) {
-                    throw new CoinbaseException(resp.statusCode(), resp.body());
+                    throw new CoinbaseException(statusCode, resp.body());
                 }
             }
-            return resp.body();
         } catch (IOException | InterruptedException e) {
             throw new CoinbaseException("Failed to send request", e);
         }
     }
+
 
     private String toJson(Object obj) throws RuntimeException {
         try {

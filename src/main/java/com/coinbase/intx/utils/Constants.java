@@ -17,7 +17,7 @@
 package com.coinbase.intx.utils;
 
 public class Constants {
-    public static final String BASE_URL = "https://api-n5e1.coinbase.com/api/v1";
+    public static final String BASE_URL = "https://api.international.coinbase.com/api/v1";
     public static final String ACCESS_KEY_HEADER = "CB-ACCESS-KEY";
     public static final String PASSPHRASE_HEADER = "CB-ACCESS-PASSPHRASE";
     public static final String SIGNATURE_HEADER = "CB-ACCESS-SIGN";
