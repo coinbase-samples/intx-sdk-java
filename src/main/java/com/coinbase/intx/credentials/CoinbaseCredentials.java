@@ -30,15 +30,12 @@ public class CoinbaseCredentials {
     private String signingKey;
     private String portfolioId;
 
-    static {
+    public CoinbaseCredentials() {
         try {
-            macInstance = Mac.getInstance(HMAC_SHA256);
+            this.macInstance = Mac.getInstance(HMAC_SHA256);
         } catch (Exception e) {
             throw new RuntimeException("Failed to initialize HMAC instance", e);
         }
-    }
-
-    public CoinbaseCredentials() {
     }
 
     public CoinbaseCredentials(Builder builder) {
@@ -46,6 +43,12 @@ public class CoinbaseCredentials {
         this.passphrase = builder.passphrase;
         this.signingKey = builder.signingKey;
         this.portfolioId = builder.portfolioId;
+
+        try {
+            this.macInstance = Mac.getInstance(HMAC_SHA256);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to initialize HMAC instance", e);
+        }
     }
 
     public void setAccessKey(String accessKey) {
@@ -94,12 +97,10 @@ public class CoinbaseCredentials {
         }
     }
 
-
     public static class Builder {
         private final String accessKey;
         private final String passphrase;
         private final String signingKey;
-
         private String portfolioId;
 
         public Builder(String accessKey, String passphrase, String signingKey) {
