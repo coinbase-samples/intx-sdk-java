@@ -16,13 +16,25 @@
 
 package com.coinbase.intx.model.instruments;
 
-public class GetInstrumentRequest {
+import com.coinbase.core.http.CoinbaseGetRequest;
+
+public class GetInstrumentRequest extends CoinbaseGetRequest {
     private String instrument;
 
     public GetInstrumentRequest() {}
 
     private GetInstrumentRequest(Builder builder) {
         this.instrument = builder.instrument;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/instruments/%s/quote", this.getInstrumentId());
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
     }
 
     public String getInstrumentId() {

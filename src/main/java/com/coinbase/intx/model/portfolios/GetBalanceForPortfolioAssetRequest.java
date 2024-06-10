@@ -16,7 +16,9 @@
 
 package com.coinbase.intx.model.portfolios;
 
-public class GetBalanceForPortfolioAssetRequest {
+import com.coinbase.core.http.CoinbaseGetRequest;
+
+public class GetBalanceForPortfolioAssetRequest extends CoinbaseGetRequest {
     private String portfolio;
     private String asset;
 
@@ -25,6 +27,16 @@ public class GetBalanceForPortfolioAssetRequest {
     private GetBalanceForPortfolioAssetRequest(Builder builder) {
         this.portfolio = builder.portfolio;
         this.asset = builder.asset;
+    }
+
+    @Override
+    public String getPath() {
+       return String.format("/portfolios/%s/balances/%s", this.getPortfolio(), this.getAsset());
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
     }
 
     public String getPortfolio() {

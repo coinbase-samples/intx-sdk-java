@@ -16,11 +16,22 @@
 
 package com.coinbase.intx.model.portfolios;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListPortfolioFeeRatesRequest {
+public class ListPortfolioFeeRatesRequest extends CoinbaseGetRequest {
     public ListPortfolioFeeRatesRequest() {}
+
+    @Override
+    public String getPath() {
+        return "/portfolios/fee-rates";
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
 
     public static class Builder {
         public Builder() {}

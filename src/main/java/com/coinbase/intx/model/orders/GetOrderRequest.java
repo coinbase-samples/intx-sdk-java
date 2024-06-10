@@ -16,11 +16,14 @@
 
 package com.coinbase.intx.model.orders;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.appendQueryParams;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GetOrderRequest {
+public class GetOrderRequest extends CoinbaseGetRequest {
     private String id;
 
     private String portfolio;
@@ -30,6 +33,16 @@ public class GetOrderRequest {
     private GetOrderRequest(Builder builder) {
         this.id = builder.id;
         this.portfolio = builder.portfolio;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/orders/%s", this.getId());
+    }
+
+    @Override
+    public String getQueryString() {
+        return appendQueryParams("", "portfolio", this.getPortfolio());
     }
 
     public String getId() {

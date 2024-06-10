@@ -16,12 +16,14 @@
 
 package com.coinbase.intx.model.orders;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.coinbase.intx.utils.Utils;
+
+import static com.coinbase.core.utils.Utils.appendQueryParams;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListOrdersRequest {
+public class ListOrdersRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 
@@ -67,35 +69,23 @@ public class ListOrdersRequest {
         this.resultOffset = builder.resultOffset;
     }
 
+    @Override
+    public String getPath() {
+        return "/orders";
+    }
+
+    @Override
     public String getQueryString() {
-        String queryParams = Utils.appendQueryParams("", "portfolio", portfolio);
-        if (instrument != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "instrument", instrument);
-        }
-        if (instrumentType != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "instrument_type", instrumentType);
-        }
-        if (clientOrderId != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "client_order_id", clientOrderId);
-        }
-        if (eventType != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "event_type", eventType);
-        }
-        if (orderType != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "order_type", orderType);
-        }
-        if (side != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "side", side);
-        }
-        if (refDatetime != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "ref_datetime", refDatetime);
-        }
-        if (resultLimit != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_limit", resultLimit.toString());
-        }
-        if (resultOffset != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_offset", resultOffset.toString());
-        }
+        String queryParams = appendQueryParams("", "portfolio", portfolio);
+        queryParams = appendQueryParams(queryParams, "instrument", instrument);
+        queryParams = appendQueryParams(queryParams, "instrument_type", instrumentType);
+        queryParams = appendQueryParams(queryParams, "client_order_id", clientOrderId);
+        queryParams = appendQueryParams(queryParams, "event_type", eventType);
+        queryParams = appendQueryParams(queryParams, "order_type", orderType);
+        queryParams = appendQueryParams(queryParams, "side", side);
+        queryParams = appendQueryParams(queryParams, "ref_datetime", refDatetime);
+        queryParams = appendQueryParams(queryParams, "result_limit", resultLimit.toString());
+        queryParams = appendQueryParams(queryParams, "result_offset", resultOffset.toString());
         return queryParams;
     }
 

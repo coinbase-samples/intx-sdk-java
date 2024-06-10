@@ -16,8 +16,18 @@
 
 package com.coinbase.intx.model.instruments;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListInstrumentsRequest {
+public class ListInstrumentsRequest extends CoinbaseGetRequest {
+    @Override
+    public String getPath() {
+        return "/instruments";
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
 }

@@ -16,8 +16,18 @@
 
 package com.coinbase.intx.model.assets;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListAssetsRequest {
+public class ListAssetsRequest extends CoinbaseGetRequest {
+    @Override
+    public String getPath() {
+        return "/assets";
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
 }

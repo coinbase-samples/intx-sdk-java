@@ -16,8 +16,18 @@
 
 package com.coinbase.intx.model.feerates;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListFeeRateTiersRequest {
+public class ListFeeRateTiersRequest extends CoinbaseGetRequest {
+    @Override
+    public String getPath() {
+        return "/fee-rate-tiers";
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
+    }
 }

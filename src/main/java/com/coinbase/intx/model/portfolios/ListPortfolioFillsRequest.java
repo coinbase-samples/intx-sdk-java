@@ -16,9 +16,11 @@
 
 package com.coinbase.intx.model.portfolios;
 
-import com.coinbase.intx.utils.Utils;
+import com.coinbase.core.http.CoinbaseGetRequest;
 
-public class ListPortfolioFillsRequest {
+import static com.coinbase.core.utils.Utils.appendQueryParams;
+
+public class ListPortfolioFillsRequest extends CoinbaseGetRequest {
     private String portfolio;
     private String orderId;
     private String clientOrderId;
@@ -37,6 +39,23 @@ public class ListPortfolioFillsRequest {
         this.resultLimit = builder.resultLimit;
         this.resultOffset = builder.resultOffset;
         this.timeFrom = builder.timeFrom;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/fills", this.getPortfolio());
+    }
+
+    @Override
+    public String getQueryString() {
+        String queryParams = "";
+        queryParams = appendQueryParams(queryParams, "order_id", orderId);
+        queryParams = appendQueryParams(queryParams, "client_order_id", clientOrderId);
+        queryParams = appendQueryParams(queryParams, "ref_datetime", refDatetime);
+        queryParams = appendQueryParams(queryParams, "result_limit", String.valueOf(resultLimit));
+        queryParams = appendQueryParams(queryParams, "result_offset", String.valueOf(resultOffset));
+        queryParams = appendQueryParams(queryParams, "time_from", timeFrom);
+        return queryParams;
     }
 
     public String getPortfolio() {
@@ -93,17 +112,6 @@ public class ListPortfolioFillsRequest {
 
     public void setTimeFrom(String timeFrom) {
         this.timeFrom = timeFrom;
-    }
-
-    public String getQueryString() {
-        String queryParams = "";
-        queryParams = Utils.appendQueryParams(queryParams, "order_id", orderId);
-        queryParams = Utils.appendQueryParams(queryParams, "client_order_id", clientOrderId);
-        queryParams = Utils.appendQueryParams(queryParams, "ref_datetime", refDatetime);
-        queryParams = Utils.appendQueryParams(queryParams, "result_limit", String.valueOf(resultLimit));
-        queryParams = Utils.appendQueryParams(queryParams, "result_offset", String.valueOf(resultOffset));
-        queryParams = Utils.appendQueryParams(queryParams, "time_from", timeFrom);
-        return queryParams;
     }
 
     public static class Builder {

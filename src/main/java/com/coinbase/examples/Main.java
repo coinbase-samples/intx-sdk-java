@@ -17,13 +17,13 @@
 package com.coinbase.examples;
 
 import com.coinbase.core.credentials.CoinbaseCredentials;
-import com.coinbase.intx.errors.CoinbaseException;
+import com.coinbase.intx.errors.CoinbaseIntxException;
 import com.coinbase.intx.model.portfolios.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.coinbase.intx.client.CoinbaseIntxHttpClient;
 
 public class Main {
-    public static void main(String[] args) throws CoinbaseException {
+    public static void main(String[] args) throws CoinbaseIntxException {
         String credsStringBlob = System.getenv("INTX_CREDENTIALS");
         ObjectMapper mapper = new ObjectMapper();
 
@@ -40,7 +40,7 @@ public class Main {
             System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(listResponse));
 
         } catch (Throwable e) {
-            throw new CoinbaseException("Failed to retrieve the list portfolios response", e);
+            throw new CoinbaseIntxException("Failed to retrieve the list portfolios response", e);
         }
     }
 }

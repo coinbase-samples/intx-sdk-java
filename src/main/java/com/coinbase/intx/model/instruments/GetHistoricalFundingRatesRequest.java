@@ -16,9 +16,11 @@
 
 package com.coinbase.intx.model.instruments;
 
-import com.coinbase.intx.utils.Utils;
+import com.coinbase.core.http.CoinbaseGetRequest;
 
-public class GetHistoricalFundingRatesRequest {
+import static com.coinbase.core.utils.Utils.appendQueryParams;
+
+public class GetHistoricalFundingRatesRequest extends CoinbaseGetRequest {
     private String instrument;
     private Integer resultLimit;
     private Integer resultOffset;
@@ -31,6 +33,19 @@ public class GetHistoricalFundingRatesRequest {
         this.resultOffset = builder.resultOffset;
     }
 
+    @Override
+    public String getPath() {
+        return String.format("/instruments/%s/funding", this.getInstrument());
+    }
+
+    @Override
+    public String getQueryString() {
+        String queryParams = "";
+        queryParams = appendQueryParams(queryParams, "result_limit", resultLimit.toString());
+        queryParams = appendQueryParams(queryParams, "result_offset", resultOffset.toString());
+        return queryParams;
+    }
+
     public String getInstrument() {
         return instrument;
     }
@@ -41,17 +56,6 @@ public class GetHistoricalFundingRatesRequest {
 
     public Integer getResultOffset() {
         return resultOffset;
-    }
-
-    public String getQueryString() {
-        String queryParams = "";
-        if (this.resultLimit != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_limit", resultLimit.toString());
-        }
-        if (this.resultOffset != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_offset", resultOffset.toString());
-        }
-        return queryParams;
     }
 
     public static class Builder {

@@ -16,7 +16,9 @@
 
 package com.coinbase.intx.model.portfolios;
 
-public class SetPortfolioMarginOverrideRequest {
+import com.coinbase.core.http.CoinbasePostRequest;
+
+public class SetPortfolioMarginOverrideRequest extends CoinbasePostRequest {
     private String portfolioId;
     private String marginOverride;
 
@@ -25,6 +27,11 @@ public class SetPortfolioMarginOverrideRequest {
     private SetPortfolioMarginOverrideRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.marginOverride = builder.marginOverride;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/margin-override", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

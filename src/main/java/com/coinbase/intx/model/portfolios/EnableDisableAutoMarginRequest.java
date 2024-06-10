@@ -16,7 +16,9 @@
 
 package com.coinbase.intx.model.portfolios;
 
-public class EnableDisableAutoMarginRequest {
+import com.coinbase.core.http.CoinbasePostRequest;
+
+public class EnableDisableAutoMarginRequest extends CoinbasePostRequest {
     private String portfolio;
     private boolean enabled;
 
@@ -25,6 +27,11 @@ public class EnableDisableAutoMarginRequest {
     private EnableDisableAutoMarginRequest(Builder builder) {
         this.portfolio = builder.portfolio;
         this.enabled = builder.enabled;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/auto-margin-enabled", this.getPortfolio());
     }
 
     public String getPortfolio() {

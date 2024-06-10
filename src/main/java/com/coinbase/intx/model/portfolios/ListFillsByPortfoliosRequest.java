@@ -16,9 +16,12 @@
 
 package com.coinbase.intx.model.portfolios;
 
-import com.coinbase.intx.utils.Utils;
+import com.coinbase.core.http.CoinbaseGetRequest;
 
-public class ListFillsByPortfoliosRequest {
+import static com.coinbase.core.utils.Utils.appendAllQueryParams;
+import static com.coinbase.core.utils.Utils.appendQueryParams;
+
+public class ListFillsByPortfoliosRequest extends CoinbaseGetRequest {
     private String[] portfolios;
     private String orderId;
     private String clientOrderId;
@@ -37,6 +40,26 @@ public class ListFillsByPortfoliosRequest {
         this.resultLimit = builder.resultLimit;
         this.resultOffset = builder.resultOffset;
         this.timeFrom = builder.timeFrom;
+    }
+
+    @Override
+    public String getPath() {
+        return "/portfolios/fills";
+    }
+
+    @Override
+    public String getQueryString() {
+        String queryParams = "";
+
+        queryParams = appendAllQueryParams(this.getPortfolios(), queryParams, "portfolios");
+        queryParams = appendQueryParams(queryParams, "order_id", this.orderId);
+        queryParams = appendQueryParams(queryParams, "client_order_id", this.clientOrderId);
+        queryParams = appendQueryParams(queryParams, "ref_datetime", this.refDatetime);
+        queryParams = appendQueryParams(queryParams, "result_limit", String.valueOf(this.resultLimit));
+        queryParams = appendQueryParams(queryParams, "result_offset", String.valueOf(this.resultOffset));
+        queryParams = appendQueryParams(queryParams, "time_from", this.timeFrom);
+
+        return queryParams;
     }
 
     public String[] getPortfolios() {
@@ -93,32 +116,6 @@ public class ListFillsByPortfoliosRequest {
 
     public void setTimeFrom(String timeFrom) {
         this.timeFrom = timeFrom;
-    }
-
-    public String getQueryString() {
-        String queryParams = "";
-        for (String portfolio : this.portfolios) {
-            queryParams = Utils.appendQueryParams(queryParams, "portfolios", portfolio);
-        }
-        if (this.orderId != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "order_id", this.orderId);
-        }
-        if (this.clientOrderId != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "client_order_id", this.clientOrderId);
-        }
-        if (this.refDatetime != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "ref_datetime", this.refDatetime);
-        }
-        if (this.resultLimit != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_limit", String.valueOf(this.resultLimit));
-        }
-        if (this.resultOffset != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_offset", String.valueOf(this.resultOffset));
-        }
-        if (this.timeFrom != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "time_from", this.timeFrom);
-        }
-        return queryParams;
     }
 
     public static class Builder {

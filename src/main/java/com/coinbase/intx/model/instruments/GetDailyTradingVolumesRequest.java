@@ -16,10 +16,11 @@
 
 package com.coinbase.intx.model.instruments;
 
-import com.coinbase.intx.utils.Utils;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.coinbase.core.http.CoinbaseGetRequest;
 
-public class GetDailyTradingVolumesRequest {
+import static com.coinbase.core.utils.Utils.appendQueryParams;
+
+public class GetDailyTradingVolumesRequest extends CoinbaseGetRequest {
     private String instruments;
     private Integer resultLimit;
     private Integer resultOffset;
@@ -34,6 +35,21 @@ public class GetDailyTradingVolumesRequest {
         this.resultOffset = builder.resultOffset;
         this.timeFrom = builder.timeFrom;
         this.showOther = builder.showOther;
+    }
+
+    @Override
+    public String getPath() {
+        return "/instruments/volumes/daily";
+    }
+
+    @Override
+    public String getQueryString() {
+        String queryParams = appendQueryParams("", "instruments", this.instruments);
+        queryParams = appendQueryParams(queryParams, "result_limit", this.resultLimit.toString());
+        queryParams = appendQueryParams(queryParams, "result_offset", this.resultOffset.toString());
+        queryParams = appendQueryParams(queryParams, "time_from", this.timeFrom);
+        queryParams = appendQueryParams(queryParams, "show_other", this.showOther.toString());
+        return queryParams;
     }
 
     public String getInstruments() {
@@ -74,23 +90,6 @@ public class GetDailyTradingVolumesRequest {
 
     public void setShowOther(Boolean showOther) {
         this.showOther = showOther;
-    }
-
-    public String getQueryString() {
-        String queryParams = Utils.appendQueryParams("", "instruments", this.instruments);
-        if (this.resultLimit != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_limit", this.resultLimit.toString());
-        }
-        if (this.resultOffset != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_offset", this.resultOffset.toString());
-        }
-        if (this.timeFrom != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "time_from", this.timeFrom);
-        }
-        if (this.showOther != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "show_other", this.showOther.toString());
-        }
-        return queryParams;
     }
 
     public static class Builder {

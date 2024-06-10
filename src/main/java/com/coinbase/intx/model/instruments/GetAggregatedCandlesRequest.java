@@ -16,9 +16,11 @@
 
 package com.coinbase.intx.model.instruments;
 
-import com.coinbase.intx.utils.Utils;
+import com.coinbase.core.http.CoinbaseGetRequest;
 
-public class GetAggregatedCandlesRequest {
+import static com.coinbase.core.utils.Utils.appendQueryParams;
+
+public class GetAggregatedCandlesRequest extends CoinbaseGetRequest {
     private String instrument;
     private String granularity;
     private String start;
@@ -31,6 +33,20 @@ public class GetAggregatedCandlesRequest {
         this.granularity = builder.granularity;
         this.start = builder.start;
         this.end = builder.end;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/instruments/%s/candles", this.getInstrument());
+    }
+
+    @Override
+    public String getQueryString() {
+        String queryParams = appendQueryParams("", "instrument", instrument);
+        queryParams = appendQueryParams(queryParams, "granularity", granularity);
+        queryParams = appendQueryParams(queryParams, "start", start);
+        queryParams = appendQueryParams(queryParams, "end", end);
+        return queryParams;
     }
 
     public String getInstrument() {
@@ -63,18 +79,6 @@ public class GetAggregatedCandlesRequest {
 
     public void setEnd(String end) {
         this.end = end;
-    }
-
-    public String getQueryString() {
-        String queryParams = Utils.appendQueryParams("", "instrument", instrument);
-        queryParams = Utils.appendQueryParams(queryParams, "granularity", granularity);
-        if (this.start != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "start", start);
-        }
-        if (this.end != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "end", end);
-        }
-        return queryParams;
     }
 
     public static class Builder {

@@ -16,12 +16,14 @@
 
 package com.coinbase.intx.model.transfers;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.coinbase.intx.utils.Utils;
+
+import static com.coinbase.core.utils.Utils.appendQueryParams;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListTransfersRequest {
+public class ListTransfersRequest extends CoinbaseGetRequest {
     @JsonProperty("portfolios")
     private String portfolios;
 
@@ -55,29 +57,20 @@ public class ListTransfersRequest {
         this.type = builder.type;
     }
 
+    @Override
+    public String getPath() {
+        return "/transfers";
+    }
+
+    @Override
     public String getQueryString() {
-        String queryParams = "";
-        if (portfolios != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "portfolios", portfolios);
-        }
-        if (timeFrom != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "time_from", timeFrom);
-        }
-        if (timeTo != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "time_to", timeTo);
-        }
-        if (resultLimit != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_limit", resultLimit.toString());
-        }
-        if (resultOffset != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "result_offset", resultOffset.toString());
-        }
-        if (status != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "status", status);
-        }
-        if (type != null) {
-            queryParams = Utils.appendQueryParams(queryParams, "type", type);
-        }
+        String queryParams = appendQueryParams("", "portfolios", portfolios);
+        queryParams = appendQueryParams(queryParams, "time_from", timeFrom);
+        queryParams = appendQueryParams(queryParams, "time_to", timeTo);
+        queryParams = appendQueryParams(queryParams, "result_limit", resultLimit.toString());
+        queryParams = appendQueryParams(queryParams, "result_offset", resultOffset.toString());
+        queryParams = appendQueryParams(queryParams, "status", status);
+        queryParams = appendQueryParams(queryParams, "type", type);
         return queryParams;
     }
 

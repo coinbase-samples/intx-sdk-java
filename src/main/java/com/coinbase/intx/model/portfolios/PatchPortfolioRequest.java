@@ -16,11 +16,12 @@
 
 package com.coinbase.intx.model.portfolios;
 
+import com.coinbase.core.http.CoinbasePatchRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PatchPortfolioRequest {
+public class PatchPortfolioRequest extends CoinbasePatchRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 
@@ -44,6 +45,11 @@ public class PatchPortfolioRequest {
         this.crossCollateralEnabled = builder.crossCollateralEnabled;
         this.positionOffsetsEnabled = builder.positionOffsetsEnabled;
         this.portfolioName = builder.portfolioName;
+    }
+
+    @Override
+    public String getPath() {
+        return "/portfolios";
     }
 
     public String getPortfolio() {

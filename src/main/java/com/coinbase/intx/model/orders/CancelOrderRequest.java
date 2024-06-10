@@ -16,11 +16,14 @@
 
 package com.coinbase.intx.model.orders;
 
+import com.coinbase.core.http.CoinbaseDeleteRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import static com.coinbase.core.utils.Utils.appendQueryParams;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CancelOrderRequest {
+public class CancelOrderRequest extends CoinbaseDeleteRequest {
     @JsonProperty("id")
     private String id;
 
@@ -32,6 +35,16 @@ public class CancelOrderRequest {
     private CancelOrderRequest(Builder builder) {
         this.id = builder.id;
         this.portfolio = builder.portfolio;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/orders/%s", this.getId());
+    }
+
+    @Override
+    public String getQueryString() {
+        return appendQueryParams("", "portfolio", this.getPortfolio());
     }
 
     public String getId() {

@@ -16,7 +16,9 @@
 
 package com.coinbase.intx.model.portfolios;
 
-public class EnableDisableCrossCollateralRequest {
+import com.coinbase.core.http.CoinbasePostRequest;
+
+public class EnableDisableCrossCollateralRequest extends CoinbasePostRequest {
     private String portfolio;
     private boolean enabled;
 
@@ -25,6 +27,11 @@ public class EnableDisableCrossCollateralRequest {
     private EnableDisableCrossCollateralRequest(Builder builder) {
         this.portfolio = builder.portfolio;
         this.enabled = builder.enabled;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/cross-collateral-enabled", this.getPortfolio());
     }
 
     public String getPortfolio() {

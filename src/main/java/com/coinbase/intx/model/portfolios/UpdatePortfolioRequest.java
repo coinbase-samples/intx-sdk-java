@@ -16,29 +16,48 @@
 
 package com.coinbase.intx.model.portfolios;
 
+import com.coinbase.core.http.CoinbasePutRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UpdatePortfolioRequest {
+public class UpdatePortfolioRequest extends CoinbasePutRequest {
+    @JsonProperty("portfolio_id")
+    private String portfolioId;
     @JsonProperty("name")
     private String name;
 
     public UpdatePortfolioRequest() {}
 
     private UpdatePortfolioRequest(Builder builder) {
+        this.portfolioId = builder.portfolioId;
         this.name = builder.name;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s", this.getPortfolioId());
     }
 
     public String getName() {
         return name;
     }
 
+    public String getPortfolioId() {
+        return portfolioId;
+    }
+
     public static class Builder {
         private String name;
+        private String portfolioId;
 
         public Builder() {}
 
         public Builder name(String name) {
             this.name = name;
+            return this;
+        }
+
+        public Builder portfolioId(String portfolioId) {
+            this.portfolioId = portfolioId;
             return this;
         }
 

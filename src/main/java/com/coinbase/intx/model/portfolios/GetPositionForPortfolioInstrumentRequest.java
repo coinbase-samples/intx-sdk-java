@@ -16,7 +16,9 @@
 
 package com.coinbase.intx.model.portfolios;
 
-public class GetPositionForPortfolioInstrumentRequest {
+import com.coinbase.core.http.CoinbaseGetRequest;
+
+public class GetPositionForPortfolioInstrumentRequest extends CoinbaseGetRequest {
     private String portfolio;
     private String instrument;
 
@@ -25,6 +27,16 @@ public class GetPositionForPortfolioInstrumentRequest {
     private GetPositionForPortfolioInstrumentRequest(Builder builder) {
         this.portfolio = builder.portfolio;
         this.instrument = builder.instrument;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s/positions/%s", this.getPortfolio(), this.getInstrument());
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
     }
 
     public String getPortfolio() {

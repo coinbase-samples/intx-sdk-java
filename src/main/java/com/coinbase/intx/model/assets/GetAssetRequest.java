@@ -16,13 +16,25 @@
 
 package com.coinbase.intx.model.assets;
 
-public class GetAssetRequest {
+import com.coinbase.core.http.CoinbaseGetRequest;
+
+public class GetAssetRequest extends CoinbaseGetRequest {
     private String assetId;
 
     public GetAssetRequest() {}
 
     private GetAssetRequest(Builder builder) {
         this.assetId = builder.assetId;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/assets/%s", this.getAssetId());
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
     }
 
     public String getAssetId() {

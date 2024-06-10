@@ -16,13 +16,25 @@
 
 package com.coinbase.intx.model.assets;
 
-public class GetSupportedNetworksRequest {
+import com.coinbase.core.http.CoinbaseGetRequest;
+
+public class GetSupportedNetworksRequest extends CoinbaseGetRequest {
     private String asset;
 
     public GetSupportedNetworksRequest() {}
 
     private GetSupportedNetworksRequest(Builder builder) {
         this.asset = builder.asset;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/assets/%s/networks", this.getAsset());
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
     }
 
     public String getAsset() {

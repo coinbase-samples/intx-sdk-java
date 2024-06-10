@@ -16,9 +16,10 @@
 
 package com.coinbase.intx.model.transfers;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class GetTransferRequest {
+public class GetTransferRequest extends CoinbaseGetRequest {
     @JsonProperty("transfer_uuid")
     private String transferUuid;
 
@@ -26,6 +27,16 @@ public class GetTransferRequest {
 
     private GetTransferRequest(Builder builder) {
         this.transferUuid = builder.transferUuid;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/transfers/%s", this.getTransferUuid());
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
     }
 
     public String getTransferUuid() {

@@ -16,7 +16,9 @@
 
 package com.coinbase.intx.model.portfolios;
 
-public class GetPortfolioRequest {
+import com.coinbase.core.http.CoinbaseGetRequest;
+
+public class GetPortfolioRequest extends CoinbaseGetRequest {
     private String portfolioId;
 
     public GetPortfolioRequest() {
@@ -28,6 +30,16 @@ public class GetPortfolioRequest {
 
     public GetPortfolioRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
+    }
+
+    @Override
+    public String getPath() {
+        return String.format("/portfolios/%s", this.getPortfolioId());
+    }
+
+    @Override
+    public String getQueryString() {
+        return "";
     }
 
     public String getPortfolioId() {

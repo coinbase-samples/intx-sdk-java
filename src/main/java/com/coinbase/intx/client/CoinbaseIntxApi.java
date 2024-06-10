@@ -16,7 +16,7 @@
 
 package com.coinbase.intx.client;
 
-import com.coinbase.intx.errors.CoinbaseException;
+import com.coinbase.intx.errors.CoinbaseIntxException;
 import com.coinbase.intx.model.assets.*;
 import com.coinbase.intx.model.feerates.ListFeeRateTiersRequest;
 import com.coinbase.intx.model.feerates.ListFeeRateTiersResponse;
@@ -27,56 +27,56 @@ import com.coinbase.intx.model.transfers.*;
 
 public interface CoinbaseIntxApi {
     // Portfolios
-    ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request)  throws CoinbaseException;
-    GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbaseException;
-    CreatePortfolioResponse createPortfolio(CreatePortfolioRequest request) throws CoinbaseException;
-    PatchPortfolioResponse patchPortfolio(PatchPortfolioRequest request) throws CoinbaseException;
-    UpdatePortfolioResponse updatePortfolio(String portfolioId, UpdatePortfolioRequest request) throws CoinbaseException;
-    GetPortfolioDetailResponse getPortfolioDetail(GetPortfolioDetailRequest request) throws CoinbaseException;
-    GetPortfolioSummaryResponse getPortfolioSummary(GetPortfolioSummaryRequest request) throws CoinbaseException;
-    ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbaseException;
-    GetBalanceForPortfolioAssetResponse getBalanceForPortfolioAsset(GetBalanceForPortfolioAssetRequest request) throws CoinbaseException;
-    ListPortfolioPositionsResponse listPortfolioPositions(ListPortfolioPositionsRequest request) throws CoinbaseException;
-    GetPositionForPortfolioInstrumentResponse getPositionForPortfolioInstrument(GetPositionForPortfolioInstrumentRequest request) throws CoinbaseException;
-    ListFillsByPortfoliosResponse listFillsByPortfolios(ListFillsByPortfoliosRequest request) throws CoinbaseException;
-    ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbaseException;
-    EnableDisableCrossCollateralResponse enableDisableCrossCollateral(EnableDisableCrossCollateralRequest request) throws CoinbaseException;
-    EnableDisableAutoMarginResponse enableDisableAutoMargin(EnableDisableAutoMarginRequest request) throws CoinbaseException;
-    SetPortfolioMarginOverrideResponse setPortfolioMarginOverride(SetPortfolioMarginOverrideRequest request) throws CoinbaseException;
-    TransferFundsResponse transferFunds(TransferFundsRequest request) throws CoinbaseException;
-    TransferPositionsResponse transferPositions(TransferPositionsRequest request) throws CoinbaseException;
-    ListPortfolioFeeRatesResponse listPortfolioFeeRates(ListPortfolioFeeRatesRequest request) throws CoinbaseException;
+    ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request)  throws CoinbaseIntxException;
+    GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbaseIntxException;
+    CreatePortfolioResponse createPortfolio(CreatePortfolioRequest request) throws CoinbaseIntxException;
+    PatchPortfolioResponse patchPortfolio(PatchPortfolioRequest request) throws CoinbaseIntxException;
+    UpdatePortfolioResponse updatePortfolio(String portfolioId, UpdatePortfolioRequest request) throws CoinbaseIntxException;
+    GetPortfolioDetailResponse getPortfolioDetail(GetPortfolioDetailRequest request) throws CoinbaseIntxException;
+    GetPortfolioSummaryResponse getPortfolioSummary(GetPortfolioSummaryRequest request) throws CoinbaseIntxException;
+    ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbaseIntxException;
+    GetBalanceForPortfolioAssetResponse getBalanceForPortfolioAsset(GetBalanceForPortfolioAssetRequest request) throws CoinbaseIntxException;
+    ListPortfolioPositionsResponse listPortfolioPositions(ListPortfolioPositionsRequest request) throws CoinbaseIntxException;
+    GetPositionForPortfolioInstrumentResponse getPositionForPortfolioInstrument(GetPositionForPortfolioInstrumentRequest request) throws CoinbaseIntxException;
+    ListFillsByPortfoliosResponse listFillsByPortfolios(ListFillsByPortfoliosRequest request) throws CoinbaseIntxException;
+    ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbaseIntxException;
+    EnableDisableCrossCollateralResponse enableDisableCrossCollateral(EnableDisableCrossCollateralRequest request) throws CoinbaseIntxException;
+    EnableDisableAutoMarginResponse enableDisableAutoMargin(EnableDisableAutoMarginRequest request) throws CoinbaseIntxException;
+    SetPortfolioMarginOverrideResponse setPortfolioMarginOverride(SetPortfolioMarginOverrideRequest request) throws CoinbaseIntxException;
+    TransferFundsResponse transferFunds(TransferFundsRequest request) throws CoinbaseIntxException;
+    TransferPositionsResponse transferPositions(TransferPositionsRequest request) throws CoinbaseIntxException;
+    ListPortfolioFeeRatesResponse listPortfolioFeeRates(ListPortfolioFeeRatesRequest request) throws CoinbaseIntxException;
 
     // Assets
-    ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbaseException;
-    GetAssetResponse getAsset(GetAssetRequest request) throws CoinbaseException;
-    GetSupportedNetworksResponse getSupportedNetworks(GetSupportedNetworksRequest request) throws CoinbaseException;
+    ListAssetsResponse listAssets(ListAssetsRequest request) throws CoinbaseIntxException;
+    GetAssetResponse getAsset(GetAssetRequest request) throws CoinbaseIntxException;
+    GetSupportedNetworksResponse getSupportedNetworks(GetSupportedNetworksRequest request) throws CoinbaseIntxException;
 
     // Instruments
-    ListInstrumentsResponse listInstruments(ListInstrumentsRequest request) throws CoinbaseException;
-    GetInstrumentResponse getInstrument(GetInstrumentRequest request) throws CoinbaseException;
-    GetInstrumentQuoteResponse getInstrumentQuote(GetInstrumentQuoteRequest request) throws CoinbaseException;
-    GetDailyTradingVolumesResponse getDailyTradingVolumes(GetDailyTradingVolumesRequest request) throws CoinbaseException;
-    GetAggregatedCandlesResponse getAggregatedCandles(GetAggregatedCandlesRequest request) throws CoinbaseException;
-    GetHistoricalFundingRatesResponse getHistoricalFundingRates(GetHistoricalFundingRatesRequest request) throws CoinbaseException;
+    ListInstrumentsResponse listInstruments(ListInstrumentsRequest request) throws CoinbaseIntxException;
+    GetInstrumentResponse getInstrument(GetInstrumentRequest request) throws CoinbaseIntxException;
+    GetInstrumentQuoteResponse getInstrumentQuote(GetInstrumentQuoteRequest request) throws CoinbaseIntxException;
+    GetDailyTradingVolumesResponse getDailyTradingVolumes(GetDailyTradingVolumesRequest request) throws CoinbaseIntxException;
+    GetAggregatedCandlesResponse getAggregatedCandles(GetAggregatedCandlesRequest request) throws CoinbaseIntxException;
+    GetHistoricalFundingRatesResponse getHistoricalFundingRates(GetHistoricalFundingRatesRequest request) throws CoinbaseIntxException;
 
     // Orders
-    CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbaseException;
-    CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbaseException;
-    CancelOrdersResponse cancelOrders(CancelOrdersRequest request) throws CoinbaseException;
-    GetOrderResponse getOrder(GetOrderRequest request) throws CoinbaseException;
-    ModifyOrderResponse modifyOrder(ModifyOrderRequest request) throws CoinbaseException;
-    ListOrdersResponse listOrders(ListOrdersRequest request) throws CoinbaseException;
+    CreateOrderResponse createOrder(CreateOrderRequest request) throws CoinbaseIntxException;
+    CancelOrderResponse cancelOrder(CancelOrderRequest request) throws CoinbaseIntxException;
+    CancelOrdersResponse cancelOrders(CancelOrdersRequest request) throws CoinbaseIntxException;
+    GetOrderResponse getOrder(GetOrderRequest request) throws CoinbaseIntxException;
+    ModifyOrderResponse modifyOrder(ModifyOrderRequest request) throws CoinbaseIntxException;
+    ListOrdersResponse listOrders(ListOrdersRequest request) throws CoinbaseIntxException;
 
     // Fee Rates
-    ListFeeRateTiersResponse listFeeRateTiers(ListFeeRateTiersRequest request) throws CoinbaseException;
+    ListFeeRateTiersResponse listFeeRateTiers(ListFeeRateTiersRequest request) throws CoinbaseIntxException;
 
     // Transfers
-    ListTransfersResponse listTransfers(ListTransfersRequest request) throws CoinbaseException;
-    GetTransferResponse getTransfer(GetTransferRequest request) throws CoinbaseException;
-    WithdrawToCryptoAddressResponse withdrawToCryptoAddress(WithdrawToCryptoAddressRequest request) throws CoinbaseException;
-    CreateCryptoAddressResponse createCryptoAddress(CreateCryptoAddressRequest request) throws CoinbaseException;
-    CreateCounterpartyIdResponse createCounterpartyId(CreateCounterpartyIdRequest request) throws CoinbaseException;
-    ValidateCounterpartyIdResponse validateCounterpartyId(ValidateCounterpartyIdRequest request) throws CoinbaseException;
-    WithdrawToCounterpartyIdResponse withdrawToCounterpartyId(WithdrawToCounterpartyIdRequest request) throws CoinbaseException;
+    ListTransfersResponse listTransfers(ListTransfersRequest request) throws CoinbaseIntxException;
+    GetTransferResponse getTransfer(GetTransferRequest request) throws CoinbaseIntxException;
+    WithdrawToCryptoAddressResponse withdrawToCryptoAddress(WithdrawToCryptoAddressRequest request) throws CoinbaseIntxException;
+    CreateCryptoAddressResponse createCryptoAddress(CreateCryptoAddressRequest request) throws CoinbaseIntxException;
+    CreateCounterpartyIdResponse createCounterpartyId(CreateCounterpartyIdRequest request) throws CoinbaseIntxException;
+    ValidateCounterpartyIdResponse validateCounterpartyId(ValidateCounterpartyIdRequest request) throws CoinbaseIntxException;
+    WithdrawToCounterpartyIdResponse withdrawToCounterpartyId(WithdrawToCounterpartyIdRequest request) throws CoinbaseIntxException;
 }

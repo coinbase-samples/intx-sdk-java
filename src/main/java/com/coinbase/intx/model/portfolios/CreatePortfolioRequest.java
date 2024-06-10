@@ -16,9 +16,10 @@
 
 package com.coinbase.intx.model.portfolios;
 
+import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreatePortfolioRequest {
+public class CreatePortfolioRequest extends CoinbasePostRequest {
     @JsonProperty("name")
     private String name;
 
@@ -26,6 +27,11 @@ public class CreatePortfolioRequest {
 
     private CreatePortfolioRequest(Builder builder) {
         this.name = builder.name;
+    }
+
+    @Override
+    public String getPath() {
+        return "/portfolios";
     }
 
     public String getName() {

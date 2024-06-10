@@ -16,10 +16,21 @@
 
 package com.coinbase.intx.model.portfolios;
 
+import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListPortfoliosRequest {
+public class ListPortfoliosRequest extends CoinbaseGetRequest {
+    @Override
+    protected String getQueryString() {
+        return "";
+    }
+
+    @Override
+    protected String getPath() {
+        return "/portfolios";
+    }
+
     public static class Builder {
         public Builder() {}
 
