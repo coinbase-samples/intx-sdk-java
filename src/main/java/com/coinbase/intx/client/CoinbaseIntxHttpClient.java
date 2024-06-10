@@ -16,7 +16,7 @@
 
 package com.coinbase.intx.client;
 
-import com.coinbase.intx.credentials.CoinbaseCredentials;
+import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.intx.errors.CoinbaseException;
 import com.coinbase.intx.errors.ErrorResponse;
 import com.coinbase.intx.model.feerates.FeeRate;
@@ -39,13 +39,13 @@ import java.net.http.HttpClient;
 import java.time.Instant;
 import java.util.List;
 
-public class CoinbaseHttpClient implements CoinbaseApi {
+public class CoinbaseIntxHttpClient implements CoinbaseIntxApi {
     private final HttpClient client;
     private final CoinbaseCredentials credentials;
     private final String baseUrl;
     private final ObjectMapper mapper;
 
-    public CoinbaseHttpClient(Builder builder) {
+    public CoinbaseIntxHttpClient(Builder builder) {
         this.credentials = builder.credentials;
         this.client = builder.client;
         this.baseUrl = builder.baseUrl;
@@ -779,7 +779,7 @@ public class CoinbaseHttpClient implements CoinbaseApi {
         long unixTimestamp = Instant.now().getEpochSecond();
         String signature;
         try {
-            signature = credentials.Sign(unixTimestamp, method, uri.getPath(), requestBody != null ? toJsonStr(requestBody) : "");
+            signature = credentials.sign(unixTimestamp, method, uri.getPath(), requestBody != null ? toJsonStr(requestBody) : "");
         } catch (Throwable e) {
             throw new CoinbaseException("Failed to generate request signature", e);
         }
@@ -847,12 +847,12 @@ public class CoinbaseHttpClient implements CoinbaseApi {
             return this;
         }
 
-        public CoinbaseHttpClient build() throws IllegalStateException {
+        public CoinbaseIntxHttpClient build() throws IllegalStateException {
             validate();
             if (client == null) {
                 client = HttpClient.newBuilder().build();
             }
-            return new CoinbaseHttpClient(this);
+            return new CoinbaseIntxHttpClient(this);
         }
 
         private void validate() throws IllegalStateException {

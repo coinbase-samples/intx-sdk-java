@@ -25,7 +25,7 @@ import com.coinbase.intx.model.orders.*;
 import com.coinbase.intx.model.portfolios.*;
 import com.coinbase.intx.model.transfers.*;
 
-public interface CoinbaseApi {
+public interface CoinbaseIntxApi {
     // Portfolios
     ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request)  throws CoinbaseException;
     GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbaseException;

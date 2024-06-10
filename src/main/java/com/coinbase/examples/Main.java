@@ -16,11 +16,11 @@
 
 package com.coinbase.examples;
 
+import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.intx.errors.CoinbaseException;
 import com.coinbase.intx.model.portfolios.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.coinbase.intx.client.CoinbaseHttpClient;
-import com.coinbase.intx.credentials.CoinbaseCredentials;
+import com.coinbase.intx.client.CoinbaseIntxHttpClient;
 
 public class Main {
     public static void main(String[] args) throws CoinbaseException {
@@ -28,8 +28,8 @@ public class Main {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            CoinbaseCredentials credentials = mapper.readValue(credsStringBlob, CoinbaseCredentials.class);
-            CoinbaseHttpClient client = new CoinbaseHttpClient.Builder(credentials)
+            CoinbaseCredentials credentials = new CoinbaseCredentials(credsStringBlob);
+            CoinbaseIntxHttpClient client = new CoinbaseIntxHttpClient.Builder(credentials)
                     .withClient(java.net.http.HttpClient.newHttpClient())
                     .build();
 
