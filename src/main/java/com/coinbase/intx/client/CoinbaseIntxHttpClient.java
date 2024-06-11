@@ -28,26 +28,53 @@ import com.coinbase.intx.model.portfolios.*;
 import com.coinbase.intx.model.assets.*;
 import com.coinbase.intx.model.transfers.*;
 import com.coinbase.intx.utils.Constants;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import java.net.URI;
-import java.net.http.HttpRequest;
 import java.net.http.HttpClient;
-import java.time.Instant;
+import java.net.http.HttpRequest;
 import java.util.List;
 
 public class CoinbaseIntxHttpClient extends CoinbaseHttpClient implements CoinbaseIntxApi {
-    private final HttpClient client;
-    private final CoinbaseCredentials credentials;
-    private final String baseUrl;
     private final ObjectMapper mapper;
+    public CoinbaseIntxHttpClient(String baseUrl, CoinbaseCredentials credentials, HttpClient client) {
+        super(baseUrl, credentials, client);
+        this.mapper = new ObjectMapper();
+        this.mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+    }
 
-    public CoinbaseIntxHttpClient(Builder builder) {
-        this.credentials = builder.credentials;
-        this.client = builder.client;
-        this.baseUrl = builder.baseUrl;
+    public CoinbaseIntxHttpClient(String baseUrl, String credentialsJson) {
+        super(baseUrl, credentialsJson);
+        this.mapper = new ObjectMapper();
+        this.mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+    }
+
+    public CoinbaseIntxHttpClient(String baseUrl, CoinbaseCredentials credentials) {
+        super(baseUrl, credentials);
+        this.mapper = new ObjectMapper();
+        this.mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+    }
+
+    public CoinbaseIntxHttpClient(CoinbaseCredentials credentials) {
+        super(Constants.BASE_URL, credentials);
+        this.mapper = new ObjectMapper();
+        this.mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+    }
+
+    public CoinbaseIntxHttpClient(String credentialsJson) {
+        super(Constants.BASE_URL, credentialsJson);
+        this.mapper = new ObjectMapper();
+        this.mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+    }
+
+    public CoinbaseIntxHttpClient(CoinbaseCredentials credentials, HttpClient client) {
+        super(Constants.BASE_URL, credentials, client);
+        this.mapper = new ObjectMapper();
+        this.mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+    }
+
+    public CoinbaseIntxHttpClient(String credentialsJson, HttpClient client) {
+        super(Constants.BASE_URL, credentialsJson, client);
         this.mapper = new ObjectMapper();
         this.mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
@@ -64,8 +91,8 @@ public class CoinbaseIntxHttpClient extends CoinbaseHttpClient implements Coinba
     @Override
     protected HttpRequest.Builder attachHeaders(HttpRequest.Builder builder, String signature, long timestamp) {
         return builder
-                .header(Constants.ACCESS_KEY_HEADER, credentials.getAccessKey())
-                .header(Constants.PASSPHRASE_HEADER, credentials.getPassphrase())
+                .header(Constants.ACCESS_KEY_HEADER, super.getCredentials().getAccessKey())
+                .header(Constants.PASSPHRASE_HEADER, super.getCredentials().getPassphrase())
                 .header(Constants.SIGNATURE_HEADER, signature)
                 .header(Constants.TIMESTAMP_HEADER, String.valueOf(timestamp))
                 .header(Constants.CONTENT_TYPE_HEADER, Constants.CONTENT_TYPE_JSON);
@@ -173,20 +200,20 @@ public class CoinbaseIntxHttpClient extends CoinbaseHttpClient implements Coinba
 
     @Override
     public ListFillsByPortfoliosResponse listFillsByPortfolios(ListFillsByPortfoliosRequest request) throws CoinbaseIntxException {
-        ListFillsByPortfoliosResponse responseObj = doGet(request, ListFillsByPortfoliosResponse.class);
+        ListFillsByPortfoliosResponse resp = doGet(request, ListFillsByPortfoliosResponse.class);
         return new ListFillsByPortfoliosResponse.Builder()
-                .pagination(responseObj.getPagination())
-                .results(responseObj.getResults())
+                .pagination(resp.getPagination())
+                .results(resp.getResults())
                 .request(request)
                 .build();
     }
 
     @Override
     public ListPortfolioFillsResponse listPortfolioFills(ListPortfolioFillsRequest request) throws CoinbaseIntxException {
-        ListPortfolioFillsResponse responseObj = doGet(request, ListPortfolioFillsResponse.class);
+        ListPortfolioFillsResponse resp = doGet(request, ListPortfolioFillsResponse.class);
         return new ListPortfolioFillsResponse.Builder()
-                .pagination(responseObj.getPagination())
-                .results(responseObj.getResults())
+                .pagination(resp.getPagination())
+                .results(resp.getResults())
                 .request(request)
                 .build();
     }
@@ -211,28 +238,28 @@ public class CoinbaseIntxHttpClient extends CoinbaseHttpClient implements Coinba
 
     @Override
     public SetPortfolioMarginOverrideResponse setPortfolioMarginOverride(SetPortfolioMarginOverrideRequest request) throws CoinbaseIntxException {
-        SetPortfolioMarginOverrideResponse responseObj = doPost(request, SetPortfolioMarginOverrideResponse.class);
+        SetPortfolioMarginOverrideResponse resp = doPost(request, SetPortfolioMarginOverrideResponse.class);
         return new SetPortfolioMarginOverrideResponse.Builder()
-                .portfolioId(responseObj.getPortfolioId())
-                .marginOverride(responseObj.getMarginOverride())
+                .portfolioId(resp.getPortfolioId())
+                .marginOverride(resp.getMarginOverride())
                 .request(request)
                 .build();
     }
 
     @Override
     public TransferFundsResponse transferFunds(TransferFundsRequest request) throws CoinbaseIntxException {
-        TransferFundsResponse responseObj = doPost(request, TransferFundsResponse.class);
+        TransferFundsResponse resp = doPost(request, TransferFundsResponse.class);
         return new TransferFundsResponse.Builder()
-                .success(responseObj.isSuccess())
+                .success(resp.isSuccess())
                 .request(request)
                 .build();
     }
 
     @Override
     public TransferPositionsResponse transferPositions(TransferPositionsRequest request) throws CoinbaseIntxException {
-        TransferPositionsResponse responseObj = doPost(request, TransferPositionsResponse.class);
+        TransferPositionsResponse resp = doPost(request, TransferPositionsResponse.class);
         return new TransferPositionsResponse.Builder()
-                .success(responseObj.isSuccess())
+                .success(resp.isSuccess())
                 .request(request)
                 .build();
     }
@@ -311,19 +338,19 @@ public class CoinbaseIntxHttpClient extends CoinbaseHttpClient implements Coinba
 
     @Override
     public GetAggregatedCandlesResponse getAggregatedCandles(GetAggregatedCandlesRequest request) throws CoinbaseIntxException {
-        GetAggregatedCandlesResponse responseObj = doGet(request, GetAggregatedCandlesResponse.class);
+        GetAggregatedCandlesResponse resp = doGet(request, GetAggregatedCandlesResponse.class);
         return new GetAggregatedCandlesResponse.Builder()
-                .aggregations(responseObj.getAggregations())
+                .aggregations(resp.getAggregations())
                 .request(request)
                 .build();
     }
 
     @Override
     public GetHistoricalFundingRatesResponse getHistoricalFundingRates(GetHistoricalFundingRatesRequest request) throws CoinbaseIntxException {
-        GetHistoricalFundingRatesResponse responseObj = doGet(request, GetHistoricalFundingRatesResponse.class);
+        GetHistoricalFundingRatesResponse resp = doGet(request, GetHistoricalFundingRatesResponse.class);
         return new GetHistoricalFundingRatesResponse.Builder()
-                .pagination(responseObj.getPagination())
-                .results(responseObj.getResults())
+                .pagination(resp.getPagination())
+                .results(resp.getResults())
                 .build();
     }
 
@@ -345,9 +372,9 @@ public class CoinbaseIntxHttpClient extends CoinbaseHttpClient implements Coinba
 
     @Override
     public CancelOrdersResponse cancelOrders(CancelOrdersRequest request) throws CoinbaseIntxException {
-        CancelOrdersResponse responseObj = doDelete(request, CancelOrdersResponse.class);
+        CancelOrdersResponse resp = doDelete(request, CancelOrdersResponse.class);
         return new CancelOrdersResponse.Builder()
-                .results(responseObj.getResults())
+                .results(resp.getResults())
                 .build();
     }
 
@@ -369,10 +396,10 @@ public class CoinbaseIntxHttpClient extends CoinbaseHttpClient implements Coinba
 
     @Override
     public ListOrdersResponse listOrders(ListOrdersRequest request) throws CoinbaseIntxException {
-        ListOrdersResponse responseObj = doGet(request, ListOrdersResponse.class);
+        ListOrdersResponse resp = doGet(request, ListOrdersResponse.class);
         return new ListOrdersResponse.Builder()
-                .pagination(responseObj.getPagination())
-                .results(responseObj.getResults())
+                .pagination(resp.getPagination())
+                .results(resp.getResults())
                 .build();
     }
 
@@ -386,10 +413,10 @@ public class CoinbaseIntxHttpClient extends CoinbaseHttpClient implements Coinba
 
     @Override
     public ListTransfersResponse listTransfers(ListTransfersRequest request) throws CoinbaseIntxException {
-        ListTransfersResponse responseObj = doGet(request, ListTransfersResponse.class);
+        ListTransfersResponse resp = doGet(request, ListTransfersResponse.class);
         return new ListTransfersResponse.Builder()
-                .pagination(responseObj.getPagination())
-                .results(responseObj.getResults())
+                .pagination(resp.getPagination())
+                .results(resp.getResults())
                 .build();
     }
 
@@ -403,121 +430,47 @@ public class CoinbaseIntxHttpClient extends CoinbaseHttpClient implements Coinba
 
     @Override
     public WithdrawToCryptoAddressResponse withdrawToCryptoAddress(WithdrawToCryptoAddressRequest request) throws CoinbaseIntxException {
-        String path = "/transfers/withdraw";
-        String response = post(path, "", request);
-
-        try {
-            WithdrawToCryptoAddressResponse responseObj = mapper.readValue(response, WithdrawToCryptoAddressResponse.class);
-            return new WithdrawToCryptoAddressResponse.Builder()
-                    .idem(responseObj.getIdem())
-                    .build();
-        } catch (Throwable e) {
-            throw new CoinbaseIntxException("Failed to retrieve the withdraw to crypto address response", e);
-        }
+        WithdrawToCryptoAddressResponse resp = doPost(request, WithdrawToCryptoAddressResponse.class);
+        return new WithdrawToCryptoAddressResponse.Builder()
+                .idem(resp.getIdem())
+                .build();
     }
 
     @Override
     public CreateCryptoAddressResponse createCryptoAddress(CreateCryptoAddressRequest request) throws CoinbaseIntxException {
-        String path = "/transfers/address";
-        String response = post(path, "", request);
-
-        try {
-            CreateCryptoAddressResponse responseObj = mapper.readValue(response, CreateCryptoAddressResponse.class);
-            return new CreateCryptoAddressResponse.Builder()
-                    .cryptoAddress(responseObj.getCryptoAddress())
-                    .build();
-        } catch (Throwable e) {
-            throw new CoinbaseIntxException("Failed to retrieve the create crypto address response", e);
-        }
+        CreateCryptoAddressResponse resp = doPost(request, CreateCryptoAddressResponse.class);
+        return new CreateCryptoAddressResponse.Builder()
+                .cryptoAddress(resp.getCryptoAddress())
+                .build();
     }
 
     @Override
     public CreateCounterpartyIdResponse createCounterpartyId(CreateCounterpartyIdRequest request) throws CoinbaseIntxException {
-        String path = "/transfers/create-counterparty-id";
-        String response = post(path, "", request);
-
-        try {
-            CreateCounterpartyIdResponse responseObj = mapper.readValue(response, CreateCounterpartyIdResponse.class);
-            return new CreateCounterpartyIdResponse.Builder()
-                    .counterparty(responseObj.getCounterparty())
-                    .build();
-        } catch (Throwable e) {
-            throw new CoinbaseIntxException("Failed to retrieve the create counterparty id response", e);
-        }
+        CreateCounterpartyIdResponse resp = doPost(request, CreateCounterpartyIdResponse.class);
+        return new CreateCounterpartyIdResponse.Builder()
+                .counterparty(resp.getCounterparty())
+                .build();
     }
 
     @Override
     public ValidateCounterpartyIdResponse validateCounterpartyId(ValidateCounterpartyIdRequest request) throws CoinbaseIntxException {
-        String path = "/transfers/validate-counterparty-id";
-        String response = post(path, "", request);
-
-        try {
-            ValidateCounterpartyIdResponse responseObj = mapper.readValue(response, ValidateCounterpartyIdResponse.class);
-            return new ValidateCounterpartyIdResponse.Builder()
-                    .counterpartyId(responseObj.getCounterpartyId())
-                    .valid(responseObj.isValid())
-                    .build();
-        } catch (Throwable e) {
-            throw new CoinbaseIntxException("Failed to retrieve the validate counterparty id response", e);
-        }
+        ValidateCounterpartyIdResponse resp = doPost(request, ValidateCounterpartyIdResponse.class);
+        return new ValidateCounterpartyIdResponse.Builder()
+                .counterpartyId(resp.getCounterpartyId())
+                .valid(resp.isValid())
+                .build();
     }
 
     @Override
     public WithdrawToCounterpartyIdResponse withdrawToCounterpartyId(WithdrawToCounterpartyIdRequest request) throws CoinbaseIntxException {
-        String path = "/transfers/withdraw/counterparty";
-        String response = post(path, "", request);
-
-        try {
-            WithdrawToCounterpartyIdResponse responseObj = mapper.readValue(response, WithdrawToCounterpartyIdResponse.class);
-            return new WithdrawToCounterpartyIdResponse.Builder()
-                    .idem(responseObj.getIdem())
-                    .portfolioUuid(responseObj.getPortfolioUuid())
-                    .sourceCounterpartyId(responseObj.getSourceCounterpartyId())
-                    .targetCounterpartyId(responseObj.getTargetCounterpartyId())
-                    .asset(responseObj.getAsset())
-                    .amount(responseObj.getAmount())
-                    .build();
-        } catch (Throwable e) {
-            throw new CoinbaseIntxException("Failed to retrieve the withdraw to counterparty id response", e);
-        }
+        WithdrawToCounterpartyIdResponse resp = doPost(request, WithdrawToCounterpartyIdResponse.class);
+        return new WithdrawToCounterpartyIdResponse.Builder()
+                .idem(resp.getIdem())
+                .portfolioUuid(resp.getPortfolioUuid())
+                .sourceCounterpartyId(resp.getSourceCounterpartyId())
+                .targetCounterpartyId(resp.getTargetCounterpartyId())
+                .asset(resp.getAsset())
+                .amount(resp.getAmount())
+                .build();
     }
-
-    public String getBaseUrl() {
-        return baseUrl;
-    }
-
-    public static class Builder {
-        public final CoinbaseCredentials credentials;
-        public HttpClient client;
-        public String baseUrl = Constants.BASE_URL;
-
-        public Builder(CoinbaseCredentials credentials) {
-            this.credentials = credentials;
-        }
-
-        public Builder withClient(HttpClient client) {
-            this.client = client;
-            return this;
-        }
-
-        public Builder withBaseUrl(String baseUrl) {
-            this.baseUrl = baseUrl;
-            return this;
-        }
-
-        public CoinbaseIntxHttpClient build() throws IllegalStateException {
-            validate();
-            if (client == null) {
-                client = HttpClient.newBuilder().build();
-            }
-            return new CoinbaseIntxHttpClient(this);
-        }
-
-        private void validate() throws IllegalStateException {
-            if (credentials == null) {
-                throw new IllegalStateException("Credentials must be provided");
-            }
-        }
-    }
-
 }

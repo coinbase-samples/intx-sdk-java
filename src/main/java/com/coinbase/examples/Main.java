@@ -29,9 +29,7 @@ public class Main {
 
         try {
             CoinbaseCredentials credentials = new CoinbaseCredentials(credsStringBlob);
-            CoinbaseIntxHttpClient client = new CoinbaseIntxHttpClient.Builder(credentials)
-                    .withClient(java.net.http.HttpClient.newHttpClient())
-                    .build();
+            CoinbaseIntxHttpClient client = new CoinbaseIntxHttpClient();
 
             ListPortfoliosRequest listReq = new ListPortfoliosRequest.Builder()
                     .build();

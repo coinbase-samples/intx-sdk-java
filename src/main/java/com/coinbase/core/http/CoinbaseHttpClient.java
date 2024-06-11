@@ -41,6 +41,30 @@ public abstract class CoinbaseHttpClient {
     private String baseUrl;
     private HttpClient client;
 
+    public CoinbaseHttpClient(String baseUrl, CoinbaseCredentials credentials) {
+        this.credentials = credentials;
+        this.baseUrl = baseUrl;
+        this.client = HttpClient.newHttpClient();
+    }
+
+    public CoinbaseHttpClient(String baseUrl, String credentialsJson) {
+        this.credentials = new CoinbaseCredentials(credentialsJson);
+        this.baseUrl = baseUrl;
+        this.client = HttpClient.newHttpClient();
+    }
+
+    public CoinbaseHttpClient(String baseUrl, CoinbaseCredentials credentials, HttpClient client) {
+        this.credentials = credentials;
+        this.baseUrl = baseUrl;
+        this.client = client;
+    }
+
+    public CoinbaseHttpClient(String baseUrl, String credentialsJson, HttpClient client) {
+        this.credentials = new CoinbaseCredentials(credentialsJson);
+        this.baseUrl = baseUrl;
+        this.client = client;
+    }
+
     protected <T> T doGet(CoinbaseGetRequest request, Class<T> responseClass) {
         String response = get(request.getPath(), request.getQueryString());
 
@@ -188,5 +212,9 @@ public abstract class CoinbaseHttpClient {
         } catch (IOException | InterruptedException e) {
             throw new CoinbaseClientException("Failed to send request", e);
         }
+    }
+
+    public CoinbaseCredentials getCredentials() {
+        return credentials;
     }
 }
