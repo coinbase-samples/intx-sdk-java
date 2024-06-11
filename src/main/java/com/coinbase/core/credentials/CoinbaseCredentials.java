@@ -59,17 +59,15 @@ public class CoinbaseCredentials {
 
     public String sign(long timestamp, String method, String path, String body) {
         try {
-            String message = String.format("%d%s%s%s", timestamp, method, path, body);
+            String message = timestamp + method + path + (body != null ? body : "");
+            byte[] hmacKey = Base64.getDecoder().decode(signingKey);
+            Mac mac = Mac.getInstance("HmacSHA256");
+            mac.init(new SecretKeySpec(hmacKey, "HmacSHA256"));
 
-            Mac macInstance = Mac.getInstance(HMAC_SHA256);
-            SecretKeySpec secretKeySpec = new SecretKeySpec(signingKey.getBytes(StandardCharsets.UTF_8), HMAC_SHA256);
-            macInstance.init(secretKeySpec);
-            byte[] signature = macInstance.doFinal(message.getBytes(StandardCharsets.UTF_8));
+            byte[] signature = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(signature);
-        } catch (NoSuchAlgorithmException e) {
-            throw new CoinbaseClientException(String.format("Algorithm %s is invalid", HMAC_SHA256), e);
         } catch (Exception e) {
-            throw new CoinbaseClientException("Failed to sign request", e);
+            throw new RuntimeException("Failed to generate signature", e);
         }
     }
 
