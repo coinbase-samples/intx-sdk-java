@@ -17,18 +17,19 @@
 package com.coinbase.core.utils;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import static com.coinbase.core.utils.Constants.EMPTY_STRING;
+
 public class Utils {
-    public static String toJsonString(ObjectMapper mapper, Object requestObject) {
+    public static String toJsonString(ObjectMapper mapper, Object requestObject) throws CoinbaseClientException {
         if (requestObject == null) {
-            return "";
+            return EMPTY_STRING;
         }
 
         try {
             return mapper.writeValueAsString(requestObject);
-        } catch (JsonProcessingException e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException("Failed to write request object as String", e);
         }
     }
@@ -47,5 +48,9 @@ public class Utils {
             }
         }
         return queryString;
+    }
+
+    public static boolean isNullOrEmpty(String str) {
+        return str == null || str.trim().isEmpty();
     }
 }

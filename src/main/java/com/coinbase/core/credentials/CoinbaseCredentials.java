@@ -17,22 +17,26 @@
 package com.coinbase.core.credentials;
 
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static com.coinbase.core.utils.Constants.BASE64_PATTERN;
+import static com.coinbase.core.utils.Constants.HMAC_SHA256;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class CoinbaseCredentials {
-    private static final String HMAC_SHA256 = "HmacSHA256";
+    @JsonProperty(required = true)
     private String accessKey;
+    @JsonProperty(required = true)
     private String passphrase;
+    @JsonProperty(required = true)
     private String signingKey;
 
-    private static final Pattern base64Pattern = Pattern.compile("^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$");
 
     public CoinbaseCredentials(String credentialsJson) {
         ObjectMapper mapper = new ObjectMapper();
@@ -41,14 +45,25 @@ public class CoinbaseCredentials {
             this.accessKey = credentials.getAccessKey();
             this.passphrase = credentials.getPassphrase();
             this.signingKey = credentials.getSigningKey();
-        } catch (Exception e) {
+        } catch (Throwable e) {
             throw new CoinbaseClientException("Failed to parse credentials", e);
         }
     }
 
     public CoinbaseCredentials(String accessKey, String passphrase, String signingKey) {
+        if (isNullOrEmpty(accessKey)) {
+            throw new CoinbaseClientException("Access key is required");
+        }
         this.accessKey = accessKey;
+
+        if (isNullOrEmpty(passphrase)) {
+            throw new CoinbaseClientException("Passphrase is required");
+        }
         this.passphrase = passphrase;
+
+        if (isNullOrEmpty(signingKey)) {
+            throw new CoinbaseClientException("Signing key is required");
+        }
         this.signingKey = signingKey;
     }
 
@@ -65,7 +80,7 @@ public class CoinbaseCredentials {
             String message = String.format("%s%s%s%s", timestamp, method, path, body);
 
             byte[] hmacKey;
-            if (base64Pattern.matcher(signingKey).matches()) {
+            if (BASE64_PATTERN.matcher(signingKey).matches()) {
                 hmacKey = Base64.getDecoder().decode(signingKey);
             } else {
                 hmacKey = this.signingKey.getBytes(StandardCharsets.UTF_8);
@@ -75,8 +90,8 @@ public class CoinbaseCredentials {
 
             byte[] signature = mac.doFinal(message.getBytes(StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(signature);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to generate signature", e);
+        } catch (Throwable e) {
+            throw new CoinbaseClientException("Failed to generate signature", e);
         }
     }
 
