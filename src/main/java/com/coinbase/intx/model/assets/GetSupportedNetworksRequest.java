@@ -54,7 +54,14 @@ public class GetSupportedNetworksRequest extends CoinbaseGetRequest {
         }
 
         public GetSupportedNetworksRequest build() {
+            validate();
             return new GetSupportedNetworksRequest(this);
+        }
+
+        private void validate() {
+            if (asset == null) {
+                throw new IllegalArgumentException("Asset is required");
+            }
         }
     }
 }

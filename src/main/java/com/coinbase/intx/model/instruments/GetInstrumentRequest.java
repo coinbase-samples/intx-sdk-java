@@ -54,7 +54,14 @@ public class GetInstrumentRequest extends CoinbaseGetRequest {
         }
 
         public GetInstrumentRequest build() {
+            validate();
             return new GetInstrumentRequest(this);
+        }
+
+        private void validate() {
+            if (instrument == null) {
+                throw new IllegalArgumentException("Instrument is required");
+            }
         }
     }
 }

@@ -70,7 +70,14 @@ public class GetOrderRequest extends CoinbaseGetRequest {
         }
 
         public GetOrderRequest build() {
+            validate();
             return new GetOrderRequest(this);
+        }
+
+        private void validate() {
+            if (id == null) {
+                throw new IllegalArgumentException("Id is required");
+            }
         }
     }
 }

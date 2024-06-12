@@ -72,7 +72,17 @@ public class GetPositionForPortfolioInstrumentRequest extends CoinbaseGetRequest
         }
 
         public GetPositionForPortfolioInstrumentRequest build() {
+            validate();
             return new GetPositionForPortfolioInstrumentRequest(this);
+        }
+
+        private void validate() {
+            if (portfolio == null) {
+                throw new IllegalArgumentException("Portfolio is required");
+            }
+            if (instrument == null) {
+                throw new IllegalArgumentException("Instrument is required");
+            }
         }
     }
 }

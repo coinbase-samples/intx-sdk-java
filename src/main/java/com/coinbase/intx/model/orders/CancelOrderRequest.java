@@ -72,7 +72,14 @@ public class CancelOrderRequest extends CoinbaseDeleteRequest {
         }
 
         public CancelOrderRequest build() {
+            validate();
             return new CancelOrderRequest(this);
+        }
+
+        private void validate() {
+            if (id == null) {
+                throw new IllegalArgumentException("Id is required");
+            }
         }
     }
 }

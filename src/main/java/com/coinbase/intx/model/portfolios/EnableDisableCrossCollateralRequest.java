@@ -59,7 +59,14 @@ public class EnableDisableCrossCollateralRequest extends CoinbasePostRequest {
         }
 
         public EnableDisableCrossCollateralRequest build() {
+            validate();
             return new EnableDisableCrossCollateralRequest(this);
+        }
+
+        private void validate() {
+            if (portfolio == null) {
+                throw new IllegalArgumentException("Portfolio is required");
+            }
         }
     }
 }

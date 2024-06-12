@@ -101,7 +101,14 @@ public class ModifyOrderRequest extends CoinbasePutRequest {
         }
 
         public ModifyOrderRequest build() {
+            validate();
             return new ModifyOrderRequest(this);
+        }
+
+        private void validate() {
+            if (id == null) {
+                throw new IllegalArgumentException("Id is required");
+            }
         }
     }
 }

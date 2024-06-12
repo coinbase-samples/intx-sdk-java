@@ -81,7 +81,14 @@ public class GetHistoricalFundingRatesRequest extends CoinbaseGetRequest {
         }
 
         public GetHistoricalFundingRatesRequest build() {
+            validate();
             return new GetHistoricalFundingRatesRequest(this);
+        }
+
+        private void validate() {
+            if (instrument == null) {
+                throw new IllegalArgumentException("instrument is required");
+            }
         }
     }
 }

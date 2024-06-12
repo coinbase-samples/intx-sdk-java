@@ -110,7 +110,14 @@ public class GetAggregatedCandlesRequest extends CoinbaseGetRequest {
         }
 
         public GetAggregatedCandlesRequest build() {
+            validate();
             return new GetAggregatedCandlesRequest(this);
+        }
+
+        private void validate() {
+            if (instrument == null) {
+                throw new IllegalArgumentException("Instrument is required");
+            }
         }
     }
 }

@@ -58,7 +58,14 @@ public class GetTransferRequest extends CoinbaseGetRequest {
         }
 
         public GetTransferRequest build() {
+            validate();
             return new GetTransferRequest(this);
+        }
+
+        private void validate() {
+            if (transferUuid == null) {
+                throw new IllegalArgumentException("Transfer UUID is required");
+            }
         }
     }
 }

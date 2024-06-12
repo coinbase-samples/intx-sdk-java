@@ -56,7 +56,14 @@ public class GetPortfolioSummaryRequest extends CoinbaseGetRequest {
         }
 
         public GetPortfolioSummaryRequest build() {
+            validate();
             return new GetPortfolioSummaryRequest(this);
+        }
+
+        private void validate() {
+            if (portfolio == null) {
+                throw new IllegalArgumentException("Portfolio is required");
+            }
         }
     }
 }

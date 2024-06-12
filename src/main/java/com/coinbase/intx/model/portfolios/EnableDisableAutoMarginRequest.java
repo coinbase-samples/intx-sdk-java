@@ -59,7 +59,14 @@ public class EnableDisableAutoMarginRequest extends CoinbasePostRequest {
         }
 
         public EnableDisableAutoMarginRequest build() {
+            validate();
             return new EnableDisableAutoMarginRequest(this);
+        }
+
+        private void validate() {
+            if (portfolio == null) {
+                throw new IllegalArgumentException("Portfolio is required");
+            }
         }
     }
 }

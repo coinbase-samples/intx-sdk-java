@@ -72,7 +72,17 @@ public class GetBalanceForPortfolioAssetRequest extends CoinbaseGetRequest {
         }
 
         public GetBalanceForPortfolioAssetRequest build() {
+            validate();
             return new GetBalanceForPortfolioAssetRequest(this);
+        }
+
+        private void validate() {
+            if (portfolio == null) {
+                throw new IllegalArgumentException("Portfolio is required");
+            }
+            if (asset == null) {
+                throw new IllegalArgumentException("Asset is required");
+            }
         }
     }
 }

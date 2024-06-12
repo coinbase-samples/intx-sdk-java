@@ -62,7 +62,14 @@ public class UpdatePortfolioRequest extends CoinbasePutRequest {
         }
 
         public UpdatePortfolioRequest build() {
+            validate();
             return new UpdatePortfolioRequest(this);
+        }
+
+        private void validate() {
+            if (portfolioId == null) {
+                throw new IllegalArgumentException("Portfolio ID is required");
+            }
         }
     }
 }

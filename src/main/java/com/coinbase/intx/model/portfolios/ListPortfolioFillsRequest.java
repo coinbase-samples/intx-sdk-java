@@ -161,7 +161,14 @@ public class ListPortfolioFillsRequest extends CoinbaseGetRequest {
         }
 
         public ListPortfolioFillsRequest build() {
+            validate();
             return new ListPortfolioFillsRequest(this);
+        }
+
+        private void validate() {
+            if (portfolio == null) {
+                throw new IllegalArgumentException("Portfolio is required");
+            }
         }
     }
 }

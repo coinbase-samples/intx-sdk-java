@@ -56,7 +56,14 @@ public class ListPortfolioPositionsRequest extends CoinbaseGetRequest {
         }
 
         public ListPortfolioPositionsRequest build() {
+            validate();
             return new ListPortfolioPositionsRequest(this);
+        }
+
+        private void validate() {
+            if (portfolio == null) {
+                throw new IllegalArgumentException("Portfolio is required");
+            }
         }
     }
 }

@@ -59,7 +59,14 @@ public class SetPortfolioMarginOverrideRequest extends CoinbasePostRequest {
         }
 
         public SetPortfolioMarginOverrideRequest build() {
+            validate();
             return new SetPortfolioMarginOverrideRequest(this);
+        }
+
+        private void validate() {
+            if (portfolioId == null) {
+                throw new IllegalArgumentException("Portfolio ID is required");
+            }
         }
     }
 }
