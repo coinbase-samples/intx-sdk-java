@@ -16,8 +16,11 @@
 
 package com.coinbase.intx.model.portfolios;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbasePutRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class UpdatePortfolioRequest extends CoinbasePutRequest {
     @JsonProperty("portfolio_id")
@@ -61,14 +64,14 @@ public class UpdatePortfolioRequest extends CoinbasePutRequest {
             return this;
         }
 
-        public UpdatePortfolioRequest build() {
+        public UpdatePortfolioRequest build() throws CoinbaseClientException {
             validate();
             return new UpdatePortfolioRequest(this);
         }
 
         private void validate() {
-            if (portfolioId == null) {
-                throw new IllegalArgumentException("Portfolio ID is required");
+            if (isNullOrEmpty(portfolioId)) {
+                throw new CoinbaseClientException("Portfolio ID is required");
             }
         }
     }

@@ -16,7 +16,10 @@
 
 package com.coinbase.intx.model.portfolios;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbasePostRequest;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class SetPortfolioMarginOverrideRequest extends CoinbasePostRequest {
     private String portfolioId;
@@ -58,14 +61,14 @@ public class SetPortfolioMarginOverrideRequest extends CoinbasePostRequest {
             return this;
         }
 
-        public SetPortfolioMarginOverrideRequest build() {
+        public SetPortfolioMarginOverrideRequest build() throws CoinbaseClientException {
             validate();
             return new SetPortfolioMarginOverrideRequest(this);
         }
 
         private void validate() {
-            if (portfolioId == null) {
-                throw new IllegalArgumentException("Portfolio ID is required");
+            if (isNullOrEmpty(portfolioId)) {
+                throw new CoinbaseClientException("Portfolio ID is required");
             }
         }
     }

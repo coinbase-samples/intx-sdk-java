@@ -16,7 +16,10 @@
 
 package com.coinbase.intx.model.assets;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetSupportedNetworksRequest extends CoinbaseGetRequest {
     private String asset;
@@ -53,14 +56,14 @@ public class GetSupportedNetworksRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetSupportedNetworksRequest build() {
+        public GetSupportedNetworksRequest build() throws CoinbaseClientException {
             validate();
             return new GetSupportedNetworksRequest(this);
         }
 
         private void validate() {
-            if (asset == null) {
-                throw new IllegalArgumentException("Asset is required");
+            if (isNullOrEmpty(asset)) {
+                throw new CoinbaseClientException("Asset is required");
             }
         }
     }

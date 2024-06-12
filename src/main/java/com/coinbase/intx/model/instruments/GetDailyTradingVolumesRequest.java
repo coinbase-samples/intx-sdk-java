@@ -16,6 +16,7 @@
 
 package com.coinbase.intx.model.instruments;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.appendQueryParams;

@@ -16,7 +16,10 @@
 
 package com.coinbase.intx.model.portfolios;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetPortfolioDetailRequest extends CoinbaseGetRequest {
     private String portfolio;
@@ -51,14 +54,14 @@ public class GetPortfolioDetailRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetPortfolioDetailRequest build() {
+        public GetPortfolioDetailRequest build() throws CoinbaseClientException {
             validate();
             return new GetPortfolioDetailRequest(this);
         }
 
         private void validate() {
-            if (portfolio == null) {
-                throw new IllegalArgumentException("Portfolio is required");
+            if (isNullOrEmpty(portfolio)) {
+                throw new CoinbaseClientException("Portfolio is required");
             }
         }
     }

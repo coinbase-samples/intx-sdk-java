@@ -16,6 +16,7 @@
 
 package com.coinbase.intx.model.assets;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
@@ -56,14 +57,14 @@ public class GetAssetRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetAssetRequest build() {
+        public GetAssetRequest build() throws CoinbaseClientException {
             this.validate();
             return new GetAssetRequest(this);
         }
 
         private void validate() {
             if (isNullOrEmpty(assetId)) {
-                throw new IllegalArgumentException("assetId is required");
+                throw new CoinbaseClientException("assetId is required");
             }
         }
     }

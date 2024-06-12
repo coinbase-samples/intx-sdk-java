@@ -16,9 +16,11 @@
 
 package com.coinbase.intx.model.instruments;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetHistoricalFundingRatesRequest extends CoinbaseGetRequest {
     private String instrument;
@@ -80,14 +82,14 @@ public class GetHistoricalFundingRatesRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetHistoricalFundingRatesRequest build() {
+        public GetHistoricalFundingRatesRequest build() throws CoinbaseClientException {
             validate();
             return new GetHistoricalFundingRatesRequest(this);
         }
 
         private void validate() {
-            if (instrument == null) {
-                throw new IllegalArgumentException("instrument is required");
+            if (isNullOrEmpty(instrument)) {
+                throw new CoinbaseClientException("instrument is required");
             }
         }
     }

@@ -16,11 +16,13 @@
 
 package com.coinbase.intx.model.orders;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseDeleteRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CancelOrderRequest extends CoinbaseDeleteRequest {
@@ -71,14 +73,14 @@ public class CancelOrderRequest extends CoinbaseDeleteRequest {
             return this;
         }
 
-        public CancelOrderRequest build() {
+        public CancelOrderRequest build() throws CoinbaseClientException {
             validate();
             return new CancelOrderRequest(this);
         }
 
         private void validate() {
-            if (id == null) {
-                throw new IllegalArgumentException("Id is required");
+            if (isNullOrEmpty(id)) {
+                throw new CoinbaseClientException("Id is required");
             }
         }
     }

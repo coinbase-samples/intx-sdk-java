@@ -16,7 +16,10 @@
 
 package com.coinbase.intx.model.portfolios;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbasePostRequest;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class EnableDisableAutoMarginRequest extends CoinbasePostRequest {
     private String portfolio;
@@ -58,14 +61,14 @@ public class EnableDisableAutoMarginRequest extends CoinbasePostRequest {
             return this;
         }
 
-        public EnableDisableAutoMarginRequest build() {
+        public EnableDisableAutoMarginRequest build() throws CoinbaseClientException {
             validate();
             return new EnableDisableAutoMarginRequest(this);
         }
 
         private void validate() {
-            if (portfolio == null) {
-                throw new IllegalArgumentException("Portfolio is required");
+            if (isNullOrEmpty(portfolio)) {
+                throw new CoinbaseClientException("Portfolio is required");
             }
         }
     }

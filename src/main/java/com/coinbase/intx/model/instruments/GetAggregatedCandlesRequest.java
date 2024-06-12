@@ -16,9 +16,11 @@
 
 package com.coinbase.intx.model.instruments;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.appendQueryParams;
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetAggregatedCandlesRequest extends CoinbaseGetRequest {
     private String instrument;
@@ -109,14 +111,14 @@ public class GetAggregatedCandlesRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetAggregatedCandlesRequest build() {
+        public GetAggregatedCandlesRequest build() throws CoinbaseClientException {
             validate();
             return new GetAggregatedCandlesRequest(this);
         }
 
         private void validate() {
-            if (instrument == null) {
-                throw new IllegalArgumentException("Instrument is required");
+            if (isNullOrEmpty(instrument)) {
+                throw new CoinbaseClientException("Instrument is required");
             }
         }
     }

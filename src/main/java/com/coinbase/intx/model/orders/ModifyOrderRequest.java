@@ -16,9 +16,12 @@
 
 package com.coinbase.intx.model.orders;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbasePutRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ModifyOrderRequest extends CoinbasePutRequest {
@@ -100,14 +103,14 @@ public class ModifyOrderRequest extends CoinbasePutRequest {
             return this;
         }
 
-        public ModifyOrderRequest build() {
+        public ModifyOrderRequest build() throws CoinbaseClientException {
             validate();
             return new ModifyOrderRequest(this);
         }
 
         private void validate() {
-            if (id == null) {
-                throw new IllegalArgumentException("Id is required");
+            if (isNullOrEmpty(id)) {
+                throw new CoinbaseClientException("Id is required");
             }
         }
     }

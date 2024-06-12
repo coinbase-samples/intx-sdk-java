@@ -16,8 +16,11 @@
 
 package com.coinbase.intx.model.transfers;
 
+import com.coinbase.core.errors.CoinbaseClientException;
 import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetTransferRequest extends CoinbaseGetRequest {
     @JsonProperty("transfer_uuid")
@@ -57,14 +60,14 @@ public class GetTransferRequest extends CoinbaseGetRequest {
             return this;
         }
 
-        public GetTransferRequest build() {
+        public GetTransferRequest build() throws CoinbaseClientException {
             validate();
             return new GetTransferRequest(this);
         }
 
         private void validate() {
-            if (transferUuid == null) {
-                throw new IllegalArgumentException("Transfer UUID is required");
+            if (isNullOrEmpty(transferUuid)) {
+                throw new CoinbaseClientException("Transfer UUID is required");
             }
         }
     }
