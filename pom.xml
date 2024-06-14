@@ -5,7 +5,15 @@
 
     <groupId>com.coinbase</groupId>
     <artifactId>intx-java-sdk</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <dependencies>
         <!-- Jackson Core -->

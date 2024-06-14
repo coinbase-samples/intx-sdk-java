@@ -25,7 +25,7 @@ public class CoinbaseIntxExceptionFactory {
         try {
             CoinbaseIntxErrorMessage errorMessage = mapper.readValue(responseBody, CoinbaseIntxErrorMessage.class);
             return new CoinbaseIntxException(statusCode, errorMessage.getMessage());
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return new CoinbaseIntxException(statusCode, responseBody);
         }
     }
@@ -34,7 +34,7 @@ public class CoinbaseIntxExceptionFactory {
         try {
             CoinbaseIntxErrorMessage errorMessage = mapper.readValue(responseBody, CoinbaseIntxErrorMessage.class);
             return new CoinbaseIntxException(errorMessage.getMessage(), cause);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return new CoinbaseIntxException(responseBody, cause);
         }
     }
@@ -43,7 +43,7 @@ public class CoinbaseIntxExceptionFactory {
         try {
             CoinbaseIntxErrorMessage errorMessage = mapper.readValue(responseBody, CoinbaseIntxErrorMessage.class);
             return new CoinbaseIntxException(statusCode, errorMessage.getMessage(), cause);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             return new CoinbaseIntxException(statusCode, responseBody, cause);
         }
     }
