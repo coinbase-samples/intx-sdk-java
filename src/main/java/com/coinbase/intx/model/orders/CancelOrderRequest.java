@@ -78,7 +78,7 @@ public class CancelOrderRequest extends CoinbaseDeleteRequest {
             return new CancelOrderRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(id)) {
                 throw new CoinbaseClientException("Id is required");
             }

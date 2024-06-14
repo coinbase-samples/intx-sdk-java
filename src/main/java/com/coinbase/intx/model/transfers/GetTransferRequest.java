@@ -65,7 +65,7 @@ public class GetTransferRequest extends CoinbaseGetRequest {
             return new GetTransferRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(transferUuid)) {
                 throw new CoinbaseClientException("Transfer UUID is required");
             }

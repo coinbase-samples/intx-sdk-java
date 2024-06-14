@@ -61,7 +61,7 @@ public class GetSupportedNetworksRequest extends CoinbaseGetRequest {
             return new GetSupportedNetworksRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(asset)) {
                 throw new CoinbaseClientException("Asset is required");
             }

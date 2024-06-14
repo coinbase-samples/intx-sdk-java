@@ -66,7 +66,7 @@ public class EnableDisableCrossCollateralRequest extends CoinbasePostRequest {
             return new EnableDisableCrossCollateralRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(portfolio)) {
                 throw new CoinbaseClientException("Portfolio is required");
             }

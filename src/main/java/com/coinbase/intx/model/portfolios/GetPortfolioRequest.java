@@ -69,7 +69,7 @@ public class GetPortfolioRequest extends CoinbaseGetRequest {
             return new GetPortfolioRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("Portfolio is required");
             }

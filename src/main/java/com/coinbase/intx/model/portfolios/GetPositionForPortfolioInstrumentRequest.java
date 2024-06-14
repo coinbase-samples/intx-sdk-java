@@ -79,7 +79,7 @@ public class GetPositionForPortfolioInstrumentRequest extends CoinbaseGetRequest
             return new GetPositionForPortfolioInstrumentRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(portfolio)) {
                 throw new CoinbaseClientException("Portfolio is required");
             }

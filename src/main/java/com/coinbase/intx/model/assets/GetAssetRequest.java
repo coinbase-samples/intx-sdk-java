@@ -62,7 +62,7 @@ public class GetAssetRequest extends CoinbaseGetRequest {
             return new GetAssetRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(assetId)) {
                 throw new CoinbaseClientException("assetId is required");
             }

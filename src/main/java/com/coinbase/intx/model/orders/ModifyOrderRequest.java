@@ -108,7 +108,7 @@ public class ModifyOrderRequest extends CoinbasePutRequest {
             return new ModifyOrderRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(id)) {
                 throw new CoinbaseClientException("Id is required");
             }

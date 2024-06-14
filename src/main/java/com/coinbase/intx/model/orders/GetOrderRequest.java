@@ -76,7 +76,7 @@ public class GetOrderRequest extends CoinbaseGetRequest {
             return new GetOrderRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(id)) {
                 throw new CoinbaseClientException("Id is required");
             }

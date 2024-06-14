@@ -66,7 +66,7 @@ public class EnableDisableAutoMarginRequest extends CoinbasePostRequest {
             return new EnableDisableAutoMarginRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(portfolio)) {
                 throw new CoinbaseClientException("Portfolio is required");
             }

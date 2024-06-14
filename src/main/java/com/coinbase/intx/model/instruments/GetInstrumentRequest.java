@@ -61,7 +61,7 @@ public class GetInstrumentRequest extends CoinbaseGetRequest {
             return new GetInstrumentRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(instrument)) {
                 throw new CoinbaseClientException("Instrument is required");
             }

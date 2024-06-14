@@ -69,7 +69,7 @@ public class UpdatePortfolioRequest extends CoinbasePutRequest {
             return new UpdatePortfolioRequest(this);
         }
 
-        private void validate() {
+        private void validate() throws CoinbaseClientException {
             if (isNullOrEmpty(portfolioId)) {
                 throw new CoinbaseClientException("Portfolio ID is required");
             }
