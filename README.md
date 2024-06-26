@@ -36,6 +36,20 @@ The client and request objects use the builder pattern, which provides a flexibl
 
 To make API calls, create a request object using the builder pattern, call the desired method on the client with the request object and then process and print the response. See an example of this inside of the [examples package](https://github.com/coinbase-samples/intx-sdk-java/blob/main/src/main/java/com/coinbase/examples/Main.java).
 
+## Binaries
+
+Binaries and dependency information for Maven, Gradle, Ivy and others can be found at the [Maven Central Repository](https://central.sonatype.com/search?q=g%3Acom.coinbase.intx+a%3Acoinbase-intx-sdk-java&smo=true)
+
+Maven example:
+
+```xml
+<dependency>
+    <groupId>com.coinbase.intx</groupId>
+    <artifactId>coinbase-intx-sdk-java</artifactId>
+    <version>x.y.z</version>
+</dependency>
+```
+
 ## Build
 
 To build the sample library, ensure that Java Development Kit (JDK) is installed and then run:
