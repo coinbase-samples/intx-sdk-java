@@ -69,11 +69,12 @@ public class TransfersServiceImpl extends CoinbaseServiceImpl implements Transfe
 
     @Override
     public ValidateCounterpartyIdResponse validateCounterpartyId(ValidateCounterpartyIdRequest request) throws CoinbaseIntxException {
-        ValidateCounterpartyIdResponse resp = doPost(request, ValidateCounterpartyIdResponse.class);
-        return new ValidateCounterpartyIdResponse.Builder()
-                .counterpartyId(resp.getCounterpartyId())
-                .valid(resp.isValid())
-                .build();
+        return this.request(
+                HttpMethod.POST,
+                "/transfers/validate-counterparty-id",
+                request,
+                List.of(200),
+                new TypeReference<ValidateCounterpartyIdResponse>() {});
     }
 
     @Override
