@@ -23,14 +23,10 @@ public class GetBalanceForPortfolioAssetResponse {
     @JsonProperty("balance")
     private PortfolioBalance balance;
 
-    @JsonProperty("request")
-    private GetBalanceForPortfolioAssetRequest request;
-
     public GetBalanceForPortfolioAssetResponse() {}
 
     private GetBalanceForPortfolioAssetResponse(Builder builder) {
         this.balance = builder.balance;
-        this.request = builder.request;
     }
 
     public PortfolioBalance getBalance() {
@@ -41,27 +37,13 @@ public class GetBalanceForPortfolioAssetResponse {
         this.balance = balance;
     }
 
-    public GetBalanceForPortfolioAssetRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(GetBalanceForPortfolioAssetRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private PortfolioBalance balance;
-        private GetBalanceForPortfolioAssetRequest request;
 
         public Builder() {}
 
         public Builder balance(PortfolioBalance balance) {
             this.balance = balance;
-            return this;
-        }
-
-        public Builder request(GetBalanceForPortfolioAssetRequest request) {
-            this.request = request;
             return this;
         }
 

@@ -22,14 +22,10 @@ public class EnableDisableCrossCollateralResponse {
     @JsonProperty("portfolio")
     private Portfolio portfolio;
 
-    @JsonProperty("request")
-    private EnableDisableCrossCollateralRequest request;
-
     public EnableDisableCrossCollateralResponse() {}
 
     private EnableDisableCrossCollateralResponse(Builder builder) {
         this.portfolio = builder.portfolio;
-        this.request = builder.request;
     }
 
     public Portfolio getPortfolio() {
@@ -40,27 +36,13 @@ public class EnableDisableCrossCollateralResponse {
         this.portfolio = portfolio;
     }
 
-    public EnableDisableCrossCollateralRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(EnableDisableCrossCollateralRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Portfolio portfolio;
-        private EnableDisableCrossCollateralRequest request;
 
         public Builder() {}
 
         public Builder portfolio(Portfolio portfolio) {
             this.portfolio = portfolio;
-            return this;
-        }
-
-        public Builder request(EnableDisableCrossCollateralRequest request) {
-            this.request = request;
             return this;
         }
 

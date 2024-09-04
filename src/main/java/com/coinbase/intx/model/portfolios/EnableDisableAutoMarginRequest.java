@@ -17,11 +17,12 @@
 package com.coinbase.intx.model.portfolios;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbasePostRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class EnableDisableAutoMarginRequest {
+    @JsonIgnore
     private String portfolio;
     private boolean enabled;
 
@@ -30,11 +31,6 @@ public class EnableDisableAutoMarginRequest {
     private EnableDisableAutoMarginRequest(Builder builder) {
         this.portfolio = builder.portfolio;
         this.enabled = builder.enabled;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/auto-margin-enabled", this.getPortfolio());
     }
 
     public String getPortfolio() {

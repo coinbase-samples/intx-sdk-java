@@ -5,11 +5,11 @@ import com.coinbase.intx.model.portfolios.*;
 
 public interface PortfoliosService {
     // Portfolios
-    ListPortfoliosResponse listPortfolios(ListPortfoliosRequest request)  throws CoinbaseIntxException;
+    ListPortfoliosResponse listPortfolios()  throws CoinbaseIntxException;
     GetPortfolioResponse getPortfolio(GetPortfolioRequest request) throws CoinbaseIntxException;
     CreatePortfolioResponse createPortfolio(CreatePortfolioRequest request) throws CoinbaseIntxException;
     PatchPortfolioResponse patchPortfolio(PatchPortfolioRequest request) throws CoinbaseIntxException;
-    UpdatePortfolioResponse updatePortfolio(String portfolioId, UpdatePortfolioRequest request) throws CoinbaseIntxException;
+    UpdatePortfolioResponse updatePortfolio(UpdatePortfolioRequest request) throws CoinbaseIntxException;
     GetPortfolioDetailResponse getPortfolioDetail(GetPortfolioDetailRequest request) throws CoinbaseIntxException;
     GetPortfolioSummaryResponse getPortfolioSummary(GetPortfolioSummaryRequest request) throws CoinbaseIntxException;
     ListPortfolioBalancesResponse listPortfolioBalances(ListPortfolioBalancesRequest request) throws CoinbaseIntxException;
@@ -23,5 +23,5 @@ public interface PortfoliosService {
     SetPortfolioMarginOverrideResponse setPortfolioMarginOverride(SetPortfolioMarginOverrideRequest request) throws CoinbaseIntxException;
     TransferFundsResponse transferFunds(TransferFundsRequest request) throws CoinbaseIntxException;
     TransferPositionsResponse transferPositions(TransferPositionsRequest request) throws CoinbaseIntxException;
-    ListPortfolioFeeRatesResponse listPortfolioFeeRates(ListPortfolioFeeRatesRequest request) throws CoinbaseIntxException;
+    ListPortfolioFeeRatesResponse listPortfolioFeeRates() throws CoinbaseIntxException;
 }

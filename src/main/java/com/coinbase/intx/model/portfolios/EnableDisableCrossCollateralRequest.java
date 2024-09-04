@@ -17,11 +17,12 @@
 package com.coinbase.intx.model.portfolios;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbasePostRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class EnableDisableCrossCollateralRequest {
+    @JsonIgnore
     private String portfolio;
     private boolean enabled;
 
@@ -30,11 +31,6 @@ public class EnableDisableCrossCollateralRequest {
     private EnableDisableCrossCollateralRequest(Builder builder) {
         this.portfolio = builder.portfolio;
         this.enabled = builder.enabled;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/cross-collateral-enabled", this.getPortfolio());
     }
 
     public String getPortfolio() {

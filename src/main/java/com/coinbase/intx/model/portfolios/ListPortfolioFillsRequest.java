@@ -17,12 +17,12 @@
 package com.coinbase.intx.model.portfolios;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import static com.coinbase.core.utils.Utils.appendQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class ListPortfolioFillsRequest {
+    @JsonIgnore
     private String portfolio;
     private String orderId;
     private String clientOrderId;
@@ -41,23 +41,6 @@ public class ListPortfolioFillsRequest {
         this.resultLimit = builder.resultLimit;
         this.resultOffset = builder.resultOffset;
         this.timeFrom = builder.timeFrom;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/fills", this.getPortfolio());
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryParams = "";
-        queryParams = appendQueryParams(queryParams, "order_id", orderId);
-        queryParams = appendQueryParams(queryParams, "client_order_id", clientOrderId);
-        queryParams = appendQueryParams(queryParams, "ref_datetime", refDatetime);
-        queryParams = appendQueryParams(queryParams, "result_limit", String.valueOf(resultLimit));
-        queryParams = appendQueryParams(queryParams, "result_offset", String.valueOf(resultOffset));
-        queryParams = appendQueryParams(queryParams, "time_from", timeFrom);
-        return queryParams;
     }
 
     public String getPortfolio() {

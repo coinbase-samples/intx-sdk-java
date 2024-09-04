@@ -17,7 +17,6 @@
 package com.coinbase.intx.model.portfolios;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
@@ -33,16 +32,6 @@ public class GetPortfolioRequest {
 
     public GetPortfolioRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s", this.getPortfolioId());
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
     }
 
     public String getPortfolioId() {

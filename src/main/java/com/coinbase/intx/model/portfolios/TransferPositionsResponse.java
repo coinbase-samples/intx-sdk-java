@@ -22,14 +22,10 @@ public class TransferPositionsResponse {
     @JsonProperty("success")
     private boolean success;
 
-    @JsonProperty("request")
-    private TransferPositionsRequest request;
-
     public TransferPositionsResponse() {}
 
     private TransferPositionsResponse(Builder builder) {
         this.success = builder.success;
-        this.request = builder.request;
     }
 
     public boolean isSuccess() {
@@ -40,27 +36,13 @@ public class TransferPositionsResponse {
         this.success = success;
     }
 
-    public TransferPositionsRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(TransferPositionsRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private boolean success;
-        private TransferPositionsRequest request;
 
         public Builder() {}
 
         public Builder success(boolean success) {
             this.success = success;
-            return this;
-        }
-
-        public Builder request(TransferPositionsRequest request) {
-            this.request = request;
             return this;
         }
 

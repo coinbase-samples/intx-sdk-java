@@ -23,14 +23,10 @@ public class GetPortfolioSummaryResponse {
     @JsonProperty("summary")
     private PortfolioDetail.Summary summary;
 
-    @JsonProperty("request")
-    private GetPortfolioSummaryRequest request;
-
     public GetPortfolioSummaryResponse() {}
 
     private GetPortfolioSummaryResponse(Builder builder) {
         this.summary = builder.summary;
-        this.request = builder.request;
     }
 
     public PortfolioDetail.Summary getSummary() {
@@ -41,27 +37,13 @@ public class GetPortfolioSummaryResponse {
         this.summary = summary;
     }
 
-    public GetPortfolioSummaryRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(GetPortfolioSummaryRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private PortfolioDetail.Summary summary;
-        private GetPortfolioSummaryRequest request;
 
         public Builder() {}
 
         public Builder summary(PortfolioDetail.Summary summary) {
             this.summary = summary;
-            return this;
-        }
-
-        public Builder request(GetPortfolioSummaryRequest request) {
-            this.request = request;
             return this;
         }
 

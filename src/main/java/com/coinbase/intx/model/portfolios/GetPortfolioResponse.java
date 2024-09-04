@@ -23,13 +23,10 @@ public class GetPortfolioResponse {
     @JsonUnwrapped
     private Portfolio portfolio;
 
-    private GetPortfolioRequest request;
-
     public GetPortfolioResponse() {}
 
     public GetPortfolioResponse(Builder builder) {
         this.portfolio = builder.portfolio;
-        this.request = builder.request;
     }
 
     public Portfolio getPortfolio() {
@@ -40,27 +37,13 @@ public class GetPortfolioResponse {
         this.portfolio = portfolio;
     }
 
-    public GetPortfolioRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(GetPortfolioRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Portfolio portfolio;
-        private GetPortfolioRequest request;
 
         public Builder() {}
 
         public Builder portfolio(Portfolio portfolio) {
             this.portfolio = portfolio;
-            return this;
-        }
-
-        public Builder request(GetPortfolioRequest request) {
-            this.request = request;
             return this;
         }
 
