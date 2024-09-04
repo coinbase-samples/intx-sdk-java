@@ -17,7 +17,6 @@
 package com.coinbase.intx.model.transfers;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
@@ -30,16 +29,6 @@ public class GetTransferRequest {
 
     private GetTransferRequest(Builder builder) {
         this.transferUuid = builder.transferUuid;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/transfers/%s", this.getTransferUuid());
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
     }
 
     public String getTransferUuid() {

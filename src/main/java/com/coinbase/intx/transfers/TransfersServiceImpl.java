@@ -1,9 +1,13 @@
 package com.coinbase.intx.transfers;
 
+import com.coinbase.core.common.HttpMethod;
 import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.intx.client.CoinbaseIntxClient;
 import com.coinbase.intx.errors.CoinbaseIntxException;
 import com.coinbase.intx.model.transfers.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.List;
 
 public class TransfersServiceImpl extends CoinbaseServiceImpl implements TransfersService {
     public TransfersServiceImpl(CoinbaseIntxClient client) {
@@ -12,16 +16,22 @@ public class TransfersServiceImpl extends CoinbaseServiceImpl implements Transfe
 
     @Override
     public ListTransfersResponse listTransfers(ListTransfersRequest request) throws CoinbaseIntxException {
-        ListTransfersResponse resp = doGet(request, ListTransfersResponse.class);
-        return new ListTransfersResponse.Builder()
-                .pagination(resp.getPagination())
-                .results(resp.getResults())
-                .build();
+        return this.request(
+                HttpMethod.GET,
+                "/transfers",
+                request,
+                List.of(200),
+                new TypeReference<ListTransfersResponse>() {});
     }
 
     @Override
     public GetTransferResponse getTransfer(GetTransferRequest request) throws CoinbaseIntxException {
-        Transfer transfer = doGet(request, Transfer.class);
+        Transfer transfer = this.request(
+                HttpMethod.GET,
+                String.format("/transfers/%s", request.getTransferUuid()),
+                null,
+                List.of(200),
+                new TypeReference<Transfer>() {});
         return new GetTransferResponse.Builder()
                 .transfer(transfer)
                 .build();
@@ -29,26 +39,32 @@ public class TransfersServiceImpl extends CoinbaseServiceImpl implements Transfe
 
     @Override
     public WithdrawToCryptoAddressResponse withdrawToCryptoAddress(WithdrawToCryptoAddressRequest request) throws CoinbaseIntxException {
-        WithdrawToCryptoAddressResponse resp = doPost(request, WithdrawToCryptoAddressResponse.class);
-        return new WithdrawToCryptoAddressResponse.Builder()
-                .idem(resp.getIdem())
-                .build();
+        return this.request(
+                HttpMethod.POST,
+                "/transfers/withdraw",
+                request,
+                List.of(200),
+                new TypeReference<WithdrawToCryptoAddressResponse>() {});
     }
 
     @Override
     public CreateCryptoAddressResponse createCryptoAddress(CreateCryptoAddressRequest request) throws CoinbaseIntxException {
-        CreateCryptoAddressResponse resp = doPost(request, CreateCryptoAddressResponse.class);
-        return new CreateCryptoAddressResponse.Builder()
-                .cryptoAddress(resp.getCryptoAddress())
-                .build();
+        return this.request(
+                HttpMethod.POST,
+                "/transfers/address",
+                request,
+                List.of(200),
+                new TypeReference<CreateCryptoAddressResponse>() {});
     }
 
     @Override
     public CreateCounterpartyIdResponse createCounterpartyId(CreateCounterpartyIdRequest request) throws CoinbaseIntxException {
-        CreateCounterpartyIdResponse resp = doPost(request, CreateCounterpartyIdResponse.class);
-        return new CreateCounterpartyIdResponse.Builder()
-                .counterparty(resp.getCounterparty())
-                .build();
+        return this.request(
+                HttpMethod.POST,
+                "/transfers/create-counterparty-id",
+                request,
+                List.of(200),
+                new TypeReference<CreateCounterpartyIdResponse>() {});
     }
 
     @Override
@@ -62,14 +78,11 @@ public class TransfersServiceImpl extends CoinbaseServiceImpl implements Transfe
 
     @Override
     public WithdrawToCounterpartyIdResponse withdrawToCounterpartyId(WithdrawToCounterpartyIdRequest request) throws CoinbaseIntxException {
-        WithdrawToCounterpartyIdResponse resp = doPost(request, WithdrawToCounterpartyIdResponse.class);
-        return new WithdrawToCounterpartyIdResponse.Builder()
-                .idem(resp.getIdem())
-                .portfolioUuid(resp.getPortfolioUuid())
-                .sourceCounterpartyId(resp.getSourceCounterpartyId())
-                .targetCounterpartyId(resp.getTargetCounterpartyId())
-                .asset(resp.getAsset())
-                .amount(resp.getAmount())
-                .build();
+        return this.request(
+                HttpMethod.POST,
+                "/transfers/withdraw/counterparty",
+                request,
+                List.of(200),
+                new TypeReference<WithdrawToCounterpartyIdResponse>() {});
     }
 }

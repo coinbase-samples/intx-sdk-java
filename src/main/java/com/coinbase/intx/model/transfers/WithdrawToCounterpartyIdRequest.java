@@ -16,7 +16,6 @@
 
 package com.coinbase.intx.model.transfers;
 
-import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -45,11 +44,6 @@ public class WithdrawToCounterpartyIdRequest {
         this.asset = builder.asset;
         this.amount = builder.amount;
         this.nonce = builder.nonce;
-    }
-
-    @Override
-    public String getPath() {
-        return "/transfers/withdraw/counterparty";
     }
 
     public String getPortfolio() {
