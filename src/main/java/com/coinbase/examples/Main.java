@@ -20,7 +20,6 @@ import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.intx.errors.CoinbaseIntxException;
 import com.coinbase.intx.model.portfolios.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.coinbase.intx.client.CoinbaseIntxHttpClient;
 
 public class Main {
     public static void main(String[] args) throws CoinbaseIntxException {
