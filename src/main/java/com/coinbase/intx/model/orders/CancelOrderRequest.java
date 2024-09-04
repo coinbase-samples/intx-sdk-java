@@ -25,7 +25,7 @@ import static com.coinbase.core.utils.Utils.appendQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CancelOrderRequest extends CoinbaseDeleteRequest {
+public class CancelOrderRequest {
     @JsonProperty("id")
     private String id;
 

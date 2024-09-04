@@ -27,36 +27,21 @@ public class ListInstrumentsResponse {
 
     public ListInstrumentsRequest request;
 
-    public ListInstrumentsResponse() {}
-
     public ListInstrumentsResponse(Builder builder) {
         this.instruments = builder.instruments;
-        this.request = builder.request;
     }
 
     public List<Instrument> getInstruments() {return instruments; }
 
     public void setInstruments(List<Instrument> instruments) {this.instruments = instruments; }
 
-    public ListInstrumentsRequest getRequest() {return request; }
-
-    public void setRequest(ListInstrumentsRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private List<Instrument> instruments;
-        public ListInstrumentsRequest request;
 
         public Builder () {}
 
         public Builder instruments(List<Instrument> instruments) {
             this.instruments = instruments;
-            return this;
-        }
-
-        public Builder request(ListInstrumentsRequest request) {
-            this.request = request;
             return this;
         }
 

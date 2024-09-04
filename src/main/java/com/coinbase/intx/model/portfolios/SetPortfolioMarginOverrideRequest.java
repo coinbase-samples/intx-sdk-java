@@ -21,7 +21,7 @@ import com.coinbase.core.http.CoinbasePostRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class SetPortfolioMarginOverrideRequest extends CoinbasePostRequest {
+public class SetPortfolioMarginOverrideRequest {
     private String portfolioId;
     private String marginOverride;
 

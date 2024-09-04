@@ -19,7 +19,7 @@ package com.coinbase.intx.model.transfers;
 import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateCounterpartyIdRequest extends CoinbasePostRequest {
+public class CreateCounterpartyIdRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 

@@ -19,7 +19,7 @@ package com.coinbase.intx.model.portfolios;
 import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreatePortfolioRequest extends CoinbasePostRequest {
+public class CreatePortfolioRequest {
     @JsonProperty("name")
     private String name;
 

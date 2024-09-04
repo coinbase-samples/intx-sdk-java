@@ -21,7 +21,7 @@ import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class ListPortfolioBalancesRequest extends CoinbaseGetRequest {
+public class ListPortfolioBalancesRequest {
     private String portfolio;
 
     public ListPortfolioBalancesRequest() {}

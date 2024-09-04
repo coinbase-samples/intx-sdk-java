@@ -22,7 +22,7 @@ import com.coinbase.core.http.CoinbaseGetRequest;
 import static com.coinbase.core.utils.Utils.appendQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetAggregatedCandlesRequest extends CoinbaseGetRequest {
+public class GetAggregatedCandlesRequest {
     private String instrument;
     private String granularity;
     private String start;

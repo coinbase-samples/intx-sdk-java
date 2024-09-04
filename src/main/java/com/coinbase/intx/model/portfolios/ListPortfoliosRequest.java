@@ -20,7 +20,7 @@ import com.coinbase.core.http.CoinbaseGetRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListPortfoliosRequest extends CoinbaseGetRequest {
+public class ListPortfoliosRequest {
     @Override
     protected String getQueryString() {
         return "";

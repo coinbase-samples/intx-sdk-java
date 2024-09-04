@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.appendQueryParams;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CancelOrdersRequest extends CoinbaseDeleteRequest {
+public class CancelOrdersRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 

@@ -22,7 +22,7 @@ import com.coinbase.core.http.CoinbaseGetRequest;
 import static com.coinbase.core.utils.Utils.appendQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetHistoricalFundingRatesRequest extends CoinbaseGetRequest {
+public class GetHistoricalFundingRatesRequest {
     private String instrument;
     private Integer resultLimit;
     private Integer resultOffset;

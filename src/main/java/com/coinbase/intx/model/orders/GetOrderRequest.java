@@ -25,7 +25,7 @@ import static com.coinbase.core.utils.Utils.appendQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GetOrderRequest extends CoinbaseGetRequest {
+public class GetOrderRequest {
     private String id;
 
     private String portfolio;

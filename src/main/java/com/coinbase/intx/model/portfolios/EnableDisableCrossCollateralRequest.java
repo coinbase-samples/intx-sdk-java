@@ -21,7 +21,7 @@ import com.coinbase.core.http.CoinbasePostRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class EnableDisableCrossCollateralRequest extends CoinbasePostRequest {
+public class EnableDisableCrossCollateralRequest {
     private String portfolio;
     private boolean enabled;
 

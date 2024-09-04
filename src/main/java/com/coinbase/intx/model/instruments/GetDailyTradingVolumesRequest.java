@@ -21,7 +21,7 @@ import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.appendQueryParams;
 
-public class GetDailyTradingVolumesRequest extends CoinbaseGetRequest {
+public class GetDailyTradingVolumesRequest {
     private String instruments;
     private Integer resultLimit;
     private Integer resultOffset;

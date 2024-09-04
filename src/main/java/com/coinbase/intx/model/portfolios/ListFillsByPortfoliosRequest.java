@@ -21,7 +21,7 @@ import com.coinbase.core.http.CoinbaseGetRequest;
 import static com.coinbase.core.utils.Utils.appendAllQueryParams;
 import static com.coinbase.core.utils.Utils.appendQueryParams;
 
-public class ListFillsByPortfoliosRequest extends CoinbaseGetRequest {
+public class ListFillsByPortfoliosRequest {
     private String[] portfolios;
     private String orderId;
     private String clientOrderId;

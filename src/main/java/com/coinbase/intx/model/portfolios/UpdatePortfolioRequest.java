@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class UpdatePortfolioRequest extends CoinbasePutRequest {
+public class UpdatePortfolioRequest {
     @JsonProperty("portfolio_id")
     private String portfolioId;
     @JsonProperty("name")

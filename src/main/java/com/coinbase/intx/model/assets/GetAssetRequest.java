@@ -17,28 +17,17 @@
 package com.coinbase.intx.model.assets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 
-public class GetAssetRequest extends CoinbaseGetRequest {
+public class GetAssetRequest {
     private String assetId;
 
     public GetAssetRequest() {}
 
     private GetAssetRequest(Builder builder) {
         this.assetId = builder.assetId;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/assets/%s", this.getAssetId());
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
     }
 
     public String getAssetId() {

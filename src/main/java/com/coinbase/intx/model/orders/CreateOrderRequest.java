@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreateOrderRequest extends CoinbasePostRequest {
+public class CreateOrderRequest {
     @JsonProperty("client_order_id")
     private String clientOrderId;
 

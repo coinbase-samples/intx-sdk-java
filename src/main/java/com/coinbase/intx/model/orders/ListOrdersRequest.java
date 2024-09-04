@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import static com.coinbase.core.utils.Utils.appendQueryParams;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListOrdersRequest extends CoinbaseGetRequest {
+public class ListOrdersRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 

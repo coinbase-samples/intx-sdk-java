@@ -18,7 +18,7 @@ package com.coinbase.intx.model.portfolios;
 
 import com.coinbase.core.http.CoinbasePostRequest;
 
-public class TransferFundsRequest extends CoinbasePostRequest {
+public class TransferFundsRequest {
     private String from;
     private String to;
     private String asset;

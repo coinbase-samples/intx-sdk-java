@@ -25,13 +25,10 @@ public class ListAssetsResponse {
     @JsonUnwrapped
     private List<Asset> assets;
 
-    private ListAssetsRequest request;
-
     public ListAssetsResponse() {}
 
     public ListAssetsResponse(Builder builder) {
         this.assets = builder.assets;
-        this.request = builder.request;
     }
 
     public List<Asset> getAssets() {
@@ -42,27 +39,13 @@ public class ListAssetsResponse {
         this.assets = assets;
     }
 
-    public ListAssetsRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListAssetsRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private List<Asset> assets;
-        private ListAssetsRequest request;
 
         public Builder() {}
 
         public Builder assets(List<Asset> assets) {
             this.assets = assets;
-            return this;
-        }
-
-        public Builder request(ListAssetsRequest request) {
-            this.request = request;
             return this;
         }
 

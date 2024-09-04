@@ -19,13 +19,11 @@ package com.coinbase.intx.model.assets;
 public class GetAssetResponse {
 
     private Asset asset;
-    private GetAssetRequest request;
 
     public GetAssetResponse() {}
 
     private GetAssetResponse(Builder builder) {
         this.asset = builder.asset;
-        this.request = builder.request;
     }
 
     public Asset getAsset() {
@@ -36,27 +34,13 @@ public class GetAssetResponse {
         this.asset = asset;
     }
 
-    public GetAssetRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(GetAssetRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Asset asset;
-        private GetAssetRequest request;
 
         public Builder() {}
 
         public Builder asset(Asset asset) {
             this.asset = asset;
-            return this;
-        }
-
-        public Builder request(GetAssetRequest request) {
-            this.request = request;
             return this;
         }
 

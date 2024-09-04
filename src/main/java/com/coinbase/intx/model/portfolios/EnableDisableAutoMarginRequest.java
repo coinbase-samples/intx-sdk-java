@@ -21,7 +21,7 @@ import com.coinbase.core.http.CoinbasePostRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class EnableDisableAutoMarginRequest extends CoinbasePostRequest {
+public class EnableDisableAutoMarginRequest {
     private String portfolio;
     private boolean enabled;
 

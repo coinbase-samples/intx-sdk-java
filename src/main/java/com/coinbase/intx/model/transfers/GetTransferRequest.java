@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetTransferRequest extends CoinbaseGetRequest {
+public class GetTransferRequest {
     @JsonProperty("transfer_uuid")
     private String transferUuid;
 

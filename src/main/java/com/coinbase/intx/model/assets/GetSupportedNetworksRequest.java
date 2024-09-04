@@ -17,27 +17,16 @@
 package com.coinbase.intx.model.assets;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetSupportedNetworksRequest extends CoinbaseGetRequest {
+public class GetSupportedNetworksRequest {
     private String asset;
 
     public GetSupportedNetworksRequest() {}
 
     private GetSupportedNetworksRequest(Builder builder) {
         this.asset = builder.asset;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/assets/%s/networks", this.getAsset());
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
     }
 
     public String getAsset() {

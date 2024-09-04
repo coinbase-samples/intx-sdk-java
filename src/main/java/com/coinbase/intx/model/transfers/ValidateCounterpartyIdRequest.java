@@ -19,7 +19,7 @@ package com.coinbase.intx.model.transfers;
 import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ValidateCounterpartyIdRequest extends CoinbasePostRequest {
+public class ValidateCounterpartyIdRequest {
     @JsonProperty("counterparty_id")
     private String counterpartyId;
 

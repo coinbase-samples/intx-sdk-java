@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class WithdrawToCryptoAddressRequest extends CoinbasePostRequest {
+public class WithdrawToCryptoAddressRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 
