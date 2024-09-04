@@ -55,28 +55,34 @@ public class InstrumentsServiceImpl extends CoinbaseServiceImpl implements Instr
 
     @Override
     public GetDailyTradingVolumesResponse getDailyTradingVolumes(GetDailyTradingVolumesRequest request) throws CoinbaseIntxException {
-        InstrumentDailyTradingVolumes dailyTradingVolumes = doGet(request, InstrumentDailyTradingVolumes.class);
+        InstrumentDailyTradingVolumes dailyTradingVolumes = this.request(
+                HttpMethod.GET,
+                "/instruments/volumes/daily",
+                request,
+                List.of(200),
+                new TypeReference<InstrumentDailyTradingVolumes>() {});
         return new GetDailyTradingVolumesResponse.Builder()
                 .dailyTradingVolumes(dailyTradingVolumes)
-                .request(request)
                 .build();
     }
 
     @Override
     public GetAggregatedCandlesResponse getAggregatedCandles(GetAggregatedCandlesRequest request) throws CoinbaseIntxException {
-        GetAggregatedCandlesResponse resp = doGet(request, GetAggregatedCandlesResponse.class);
-        return new GetAggregatedCandlesResponse.Builder()
-                .aggregations(resp.getAggregations())
-                .request(request)
-                .build();
+        return this.request(
+                HttpMethod.GET,
+                String.format("/instruments/%s/candles", request.getInstrument()),
+                request,
+                List.of(200),
+                new TypeReference<GetAggregatedCandlesResponse>() {});
     }
 
     @Override
     public GetHistoricalFundingRatesResponse getHistoricalFundingRates(GetHistoricalFundingRatesRequest request) throws CoinbaseIntxException {
-        GetHistoricalFundingRatesResponse resp = doGet(request, GetHistoricalFundingRatesResponse.class);
-        return new GetHistoricalFundingRatesResponse.Builder()
-                .pagination(resp.getPagination())
-                .results(resp.getResults())
-                .build();
+        return this.request(
+                HttpMethod.GET,
+                String.format("/instruments/%s/funding", request.getInstrument()),
+                request,
+                List.of(200),
+                new TypeReference<GetHistoricalFundingRatesResponse>() {});
     }
 }

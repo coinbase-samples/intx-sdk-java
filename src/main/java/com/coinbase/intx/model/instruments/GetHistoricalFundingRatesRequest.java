@@ -17,12 +17,13 @@
 package com.coinbase.intx.model.instruments;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static com.coinbase.core.utils.Utils.appendQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetHistoricalFundingRatesRequest {
+    @JsonIgnore
     private String instrument;
     private Integer resultLimit;
     private Integer resultOffset;
@@ -33,19 +34,6 @@ public class GetHistoricalFundingRatesRequest {
         this.instrument = builder.instrument;
         this.resultLimit = builder.resultLimit;
         this.resultOffset = builder.resultOffset;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/instruments/%s/funding", this.getInstrument());
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryParams = "";
-        queryParams = appendQueryParams(queryParams, "result_limit", resultLimit.toString());
-        queryParams = appendQueryParams(queryParams, "result_offset", resultOffset.toString());
-        return queryParams;
     }
 
     public String getInstrument() {

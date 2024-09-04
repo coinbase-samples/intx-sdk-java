@@ -22,13 +22,10 @@ public class GetAggregatedCandlesResponse {
     @JsonProperty("aggregations")
     private Aggregation[] aggregations;
 
-    private GetAggregatedCandlesRequest request;
-
     public GetAggregatedCandlesResponse() {}
 
     private GetAggregatedCandlesResponse(Builder builder) {
         this.aggregations = builder.aggregations;
-        this.request = builder.request;
     }
 
     public Aggregation[] getAggregations() {
@@ -39,27 +36,13 @@ public class GetAggregatedCandlesResponse {
         this.aggregations = aggregations;
     }
 
-    public GetAggregatedCandlesRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(GetAggregatedCandlesRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Aggregation[] aggregations;
-        private GetAggregatedCandlesRequest request;
 
         public Builder() {}
 
         public Builder aggregations(Aggregation[] aggregations) {
             this.aggregations = aggregations;
-            return this;
-        }
-
-        public Builder request(GetAggregatedCandlesRequest request) {
-            this.request = request;
             return this;
         }
 

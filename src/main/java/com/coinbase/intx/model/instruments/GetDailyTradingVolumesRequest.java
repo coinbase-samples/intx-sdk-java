@@ -16,10 +16,7 @@
 
 package com.coinbase.intx.model.instruments;
 
-import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
-
-import static com.coinbase.core.utils.Utils.appendQueryParams;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class GetDailyTradingVolumesRequest {
     private String instruments;
@@ -36,21 +33,6 @@ public class GetDailyTradingVolumesRequest {
         this.resultOffset = builder.resultOffset;
         this.timeFrom = builder.timeFrom;
         this.showOther = builder.showOther;
-    }
-
-    @Override
-    public String getPath() {
-        return "/instruments/volumes/daily";
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryParams = appendQueryParams("", "instruments", this.instruments);
-        queryParams = appendQueryParams(queryParams, "result_limit", this.resultLimit.toString());
-        queryParams = appendQueryParams(queryParams, "result_offset", this.resultOffset.toString());
-        queryParams = appendQueryParams(queryParams, "time_from", this.timeFrom);
-        queryParams = appendQueryParams(queryParams, "show_other", this.showOther.toString());
-        return queryParams;
     }
 
     public String getInstruments() {
