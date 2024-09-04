@@ -17,7 +17,6 @@
 package com.coinbase.intx.model.instruments;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
@@ -28,16 +27,6 @@ public class GetInstrumentQuoteRequest {
 
     private GetInstrumentQuoteRequest(Builder builder) {
         this.instrument = builder.instrument;
-    }
-
-    @Override
-    public String getPath() {
-        return ;
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
     }
 
     public String getInstrument() {
