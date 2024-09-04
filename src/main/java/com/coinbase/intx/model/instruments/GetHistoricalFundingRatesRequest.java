@@ -19,7 +19,6 @@ package com.coinbase.intx.model.instruments;
 import com.coinbase.core.errors.CoinbaseClientException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import static com.coinbase.core.utils.Utils.appendQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 public class GetHistoricalFundingRatesRequest {

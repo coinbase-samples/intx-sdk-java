@@ -23,14 +23,10 @@ public class ListPortfolioFeeRatesResponse {
     @JsonProperty("results")
     private List<PortfolioFeeRate> feeRates;
 
-    @JsonProperty("request")
-    private ListPortfolioFeeRatesRequest request;
-
     public ListPortfolioFeeRatesResponse() {}
 
     private ListPortfolioFeeRatesResponse(Builder builder) {
         this.feeRates = builder.feeRates;
-        this.request = builder.request;
     }
 
     public List<PortfolioFeeRate> getFeeRates() {
@@ -41,27 +37,13 @@ public class ListPortfolioFeeRatesResponse {
         this.feeRates = feeRates;
     }
 
-    public ListPortfolioFeeRatesRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListPortfolioFeeRatesRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private List<PortfolioFeeRate> feeRates;
-        private ListPortfolioFeeRatesRequest request;
 
         public Builder() {}
 
         public Builder feeRates(List<PortfolioFeeRate> feeRates) {
             this.feeRates = feeRates;
-            return this;
-        }
-
-        public Builder request(ListPortfolioFeeRatesRequest request) {
-            this.request = request;
             return this;
         }
 
