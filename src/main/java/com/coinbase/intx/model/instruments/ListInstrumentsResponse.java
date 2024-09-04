@@ -25,8 +25,6 @@ public class ListInstrumentsResponse {
     @JsonUnwrapped
     private List<Instrument> instruments;
 
-    public ListInstrumentsRequest request;
-
     public ListInstrumentsResponse(Builder builder) {
         this.instruments = builder.instruments;
     }

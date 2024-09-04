@@ -5,7 +5,7 @@ import com.coinbase.intx.model.instruments.*;
 
 public interface InstrumentsService {
     // Instruments
-    ListInstrumentsResponse listInstruments(ListInstrumentsRequest request) throws CoinbaseIntxException;
+    ListInstrumentsResponse listInstruments() throws CoinbaseIntxException;
     GetInstrumentResponse getInstrument(GetInstrumentRequest request) throws CoinbaseIntxException;
     GetInstrumentQuoteResponse getInstrumentQuote(GetInstrumentQuoteRequest request) throws CoinbaseIntxException;
     GetDailyTradingVolumesResponse getDailyTradingVolumes(GetDailyTradingVolumesRequest request) throws CoinbaseIntxException;

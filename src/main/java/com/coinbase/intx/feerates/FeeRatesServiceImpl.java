@@ -5,7 +5,6 @@ import com.coinbase.core.service.CoinbaseServiceImpl;
 import com.coinbase.intx.client.CoinbaseIntxClient;
 import com.coinbase.intx.errors.CoinbaseIntxException;
 import com.coinbase.intx.model.feerates.FeeRate;
-import com.coinbase.intx.model.feerates.ListFeeRateTiersRequest;
 import com.coinbase.intx.model.feerates.ListFeeRateTiersResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -17,7 +16,7 @@ public class FeeRatesServiceImpl extends CoinbaseServiceImpl implements FeeRates
     }
 
     @Override
-    public ListFeeRateTiersResponse listFeeRateTiers(ListFeeRateTiersRequest request) throws CoinbaseIntxException {
+    public ListFeeRateTiersResponse listFeeRateTiers() throws CoinbaseIntxException {
         List<FeeRate> feeRates = this.request(
                 HttpMethod.GET,
                 "/fee-rate-tiers",

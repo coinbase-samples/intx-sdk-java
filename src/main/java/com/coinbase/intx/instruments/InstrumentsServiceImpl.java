@@ -15,7 +15,7 @@ public class InstrumentsServiceImpl extends CoinbaseServiceImpl implements Instr
     }
 
     @Override
-    public ListInstrumentsResponse listInstruments(ListInstrumentsRequest request) throws CoinbaseIntxException {
+    public ListInstrumentsResponse listInstruments() throws CoinbaseIntxException {
         List<Instrument> instruments = this.request(
                 HttpMethod.GET,
                 "/instruments",
