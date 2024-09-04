@@ -31,7 +31,7 @@ public class Main {
 
         try {
             CoinbaseIntxCredentials credentials = new CoinbaseIntxCredentials(credsStringBlob);
-            CoinbaseIntxClient client = new CoinbaseIntxClient(credentials, "https://api-n5e1.coinbase.com/api/v1");
+            CoinbaseIntxClient client = new CoinbaseIntxClient(credentials);
 
             PortfoliosService portfoliosService = new PortfoliosServiceImpl(client);
 

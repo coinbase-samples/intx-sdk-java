@@ -18,6 +18,7 @@ package com.coinbase.intx.credentials;
 
 import com.coinbase.core.credentials.CoinbaseCredentials;
 import com.coinbase.core.errors.CoinbaseClientException;
+import com.coinbase.intx.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -85,7 +86,8 @@ public class CoinbaseIntxCredentials implements CoinbaseCredentials {
                 "CB-ACCESS-KEY", accessKey,
                 "CB-ACCESS-SIGN", signature,
                 "CB-ACCESS-TIMESTAMP", String.valueOf(timestamp),
-                "CB-ACCESS-PASSPHRASE", passphrase
+                "CB-ACCESS-PASSPHRASE", passphrase,
+                "User-Agent", String.format("intx-sdk-java/%s", Constants.SDK_VERSION)
         );
     }
 
