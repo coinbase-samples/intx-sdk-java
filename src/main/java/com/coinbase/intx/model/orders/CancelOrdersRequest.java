@@ -16,15 +16,9 @@
 
 package com.coinbase.intx.model.orders;
 
-import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseDeleteRequest;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import static com.coinbase.core.utils.Utils.appendQueryParams;
-
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class CancelOrdersRequest extends CoinbaseDeleteRequest {
+public class CancelOrdersRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 
@@ -44,20 +38,6 @@ public class CancelOrdersRequest extends CoinbaseDeleteRequest {
         this.instrument = builder.instrument;
         this.side = builder.side;
         this.instrumentType = builder.instrumentType;
-    }
-
-    @Override
-    public String getPath() {
-        return "/orders";
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryParams = appendQueryParams("", "portfolio", portfolio);
-        queryParams = appendQueryParams(queryParams, "instrument", instrument);
-        queryParams = appendQueryParams(queryParams, "side", side);
-        queryParams = appendQueryParams(queryParams, "instrument_type", instrumentType);
-        return queryParams;
     }
 
     public static class Builder {

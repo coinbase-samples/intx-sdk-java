@@ -16,12 +16,7 @@
 
 package com.coinbase.intx.model.portfolios;
 
-import com.coinbase.core.http.CoinbaseGetRequest;
-
-import static com.coinbase.core.utils.Utils.appendAllQueryParams;
-import static com.coinbase.core.utils.Utils.appendQueryParams;
-
-public class ListFillsByPortfoliosRequest extends CoinbaseGetRequest {
+public class ListFillsByPortfoliosRequest {
     private String[] portfolios;
     private String orderId;
     private String clientOrderId;
@@ -40,26 +35,6 @@ public class ListFillsByPortfoliosRequest extends CoinbaseGetRequest {
         this.resultLimit = builder.resultLimit;
         this.resultOffset = builder.resultOffset;
         this.timeFrom = builder.timeFrom;
-    }
-
-    @Override
-    public String getPath() {
-        return "/portfolios/fills";
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryParams = "";
-
-        queryParams = appendAllQueryParams(this.getPortfolios(), queryParams, "portfolios");
-        queryParams = appendQueryParams(queryParams, "order_id", this.orderId);
-        queryParams = appendQueryParams(queryParams, "client_order_id", this.clientOrderId);
-        queryParams = appendQueryParams(queryParams, "ref_datetime", this.refDatetime);
-        queryParams = appendQueryParams(queryParams, "result_limit", String.valueOf(this.resultLimit));
-        queryParams = appendQueryParams(queryParams, "result_offset", String.valueOf(this.resultOffset));
-        queryParams = appendQueryParams(queryParams, "time_from", this.timeFrom);
-
-        return queryParams;
     }
 
     public String[] getPortfolios() {

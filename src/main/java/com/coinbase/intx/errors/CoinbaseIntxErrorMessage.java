@@ -16,37 +16,19 @@
 
 package com.coinbase.intx.errors;
 
-public class CoinbaseIntxErrorMessage {
-    private String message;
+import com.coinbase.core.errors.CoinbaseErrorMessage;
+import com.coinbase.core.errors.CoinbaseException;
+
+public class CoinbaseIntxErrorMessage implements CoinbaseErrorMessage {
+    private String title;
+    private int status;
+    private String error;
 
     public CoinbaseIntxErrorMessage() {
     }
 
-    public CoinbaseIntxErrorMessage(Builder builder) {
-        this.message = builder.message;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public static class Builder {
-        private String message;
-
-        public Builder() {
-        }
-
-        public Builder message(String message) {
-            this.message = message;
-            return this;
-        }
-
-        public CoinbaseIntxErrorMessage build() {
-            return new CoinbaseIntxErrorMessage(this);
-        }
+    @Override
+    public CoinbaseException createCoinbaseException() {
+        return new CoinbaseIntxException(status, String.format("Title: %s, Error: %s", this.title, this.error));
     }
 }

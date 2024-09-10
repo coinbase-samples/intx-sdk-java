@@ -16,9 +16,7 @@
 
 package com.coinbase.intx.model.portfolios;
 
-import com.coinbase.core.http.CoinbasePostRequest;
-
-public class TransferPositionsRequest extends CoinbasePostRequest {
+public class TransferPositionsRequest {
     private String from;
     private String to;
     private String instrument;
@@ -33,11 +31,6 @@ public class TransferPositionsRequest extends CoinbasePostRequest {
         this.instrument = builder.instrument;
         this.quantity = builder.quantity;
         this.side = builder.side;
-    }
-
-    @Override
-    public String getPath() {
-        return "/portfolios/transfer-position";
     }
 
     public String getFrom() {

@@ -17,14 +17,16 @@
 package com.coinbase.intx.model.portfolios;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbasePutRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class UpdatePortfolioRequest extends CoinbasePutRequest {
+public class UpdatePortfolioRequest {
     @JsonProperty("portfolio_id")
+    @JsonIgnore
     private String portfolioId;
+
     @JsonProperty("name")
     private String name;
 
@@ -33,11 +35,6 @@ public class UpdatePortfolioRequest extends CoinbasePutRequest {
     private UpdatePortfolioRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.name = builder.name;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s", this.getPortfolioId());
     }
 
     public String getName() {

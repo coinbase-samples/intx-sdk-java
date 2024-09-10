@@ -14,20 +14,12 @@
  * limitations under the License.
  */
 
-package com.coinbase.intx.model.feerates;
+package com.coinbase.intx.feerates;
 
-import com.coinbase.core.http.CoinbaseGetRequest;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.coinbase.intx.errors.CoinbaseIntxException;
+import com.coinbase.intx.model.feerates.ListFeeRateTiersResponse;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListFeeRateTiersRequest extends CoinbaseGetRequest {
-    @Override
-    public String getPath() {
-        return "/fee-rate-tiers";
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
-    }
+public interface FeeRatesService {
+    // Fee Rates
+    ListFeeRateTiersResponse listFeeRateTiers() throws CoinbaseIntxException;
 }

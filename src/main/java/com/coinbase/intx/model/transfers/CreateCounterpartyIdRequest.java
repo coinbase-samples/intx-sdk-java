@@ -16,10 +16,9 @@
 
 package com.coinbase.intx.model.transfers;
 
-import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class CreateCounterpartyIdRequest extends CoinbasePostRequest {
+public class CreateCounterpartyIdRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 
@@ -27,11 +26,6 @@ public class CreateCounterpartyIdRequest extends CoinbasePostRequest {
 
     private CreateCounterpartyIdRequest(Builder builder) {
         this.portfolio = builder.portfolio;
-    }
-
-    @Override
-    public String getPath() {
-        return "/transfers/create-counterparty-id";
     }
 
     public String getPortfolio() {

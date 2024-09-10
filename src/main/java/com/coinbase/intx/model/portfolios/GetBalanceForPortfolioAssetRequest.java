@@ -17,11 +17,10 @@
 package com.coinbase.intx.model.portfolios;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetBalanceForPortfolioAssetRequest extends CoinbaseGetRequest {
+public class GetBalanceForPortfolioAssetRequest {
     private String portfolio;
     private String asset;
 
@@ -30,16 +29,6 @@ public class GetBalanceForPortfolioAssetRequest extends CoinbaseGetRequest {
     private GetBalanceForPortfolioAssetRequest(Builder builder) {
         this.portfolio = builder.portfolio;
         this.asset = builder.asset;
-    }
-
-    @Override
-    public String getPath() {
-       return String.format("/portfolios/%s/balances/%s", this.getPortfolio(), this.getAsset());
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
     }
 
     public String getPortfolio() {

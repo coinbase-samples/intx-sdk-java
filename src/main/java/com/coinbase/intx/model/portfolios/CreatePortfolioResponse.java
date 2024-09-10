@@ -24,14 +24,10 @@ public class CreatePortfolioResponse {
     @JsonProperty("portfolio")
     private Portfolio portfolio;
 
-    @JsonProperty("request")
-    private CreatePortfolioRequest request;
-
     public CreatePortfolioResponse() {}
 
     private CreatePortfolioResponse(Builder builder) {
         this.portfolio = builder.portfolio;
-        this.request = builder.request;
     }
 
     public Portfolio getPortfolio() {
@@ -42,27 +38,13 @@ public class CreatePortfolioResponse {
         this.portfolio = portfolio;
     }
 
-    public CreatePortfolioRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(CreatePortfolioRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Portfolio portfolio;
-        private CreatePortfolioRequest request;
 
         public Builder() {}
 
         public Builder portfolio(Portfolio portfolio) {
             this.portfolio = portfolio;
-            return this;
-        }
-
-        public Builder request(CreatePortfolioRequest request) {
-            this.request = request;
             return this;
         }
 

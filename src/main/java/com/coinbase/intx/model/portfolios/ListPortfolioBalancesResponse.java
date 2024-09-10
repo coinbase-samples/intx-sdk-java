@@ -24,14 +24,10 @@ public class ListPortfolioBalancesResponse {
     @JsonProperty("balances")
     private List<PortfolioBalance> balances;
 
-    @JsonProperty("request")
-    private ListPortfolioBalancesRequest request;
-
     public ListPortfolioBalancesResponse() {}
 
     private ListPortfolioBalancesResponse(Builder builder) {
         this.balances = builder.balances;
-        this.request = builder.request;
     }
 
     public List<PortfolioBalance> getBalances() {
@@ -42,27 +38,13 @@ public class ListPortfolioBalancesResponse {
         this.balances = balances;
     }
 
-    public ListPortfolioBalancesRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListPortfolioBalancesRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private List<PortfolioBalance> balances;
-        private ListPortfolioBalancesRequest request;
 
         public Builder() {}
 
         public Builder balances(List<PortfolioBalance> balances) {
             this.balances = balances;
-            return this;
-        }
-
-        public Builder request(ListPortfolioBalancesRequest request) {
-            this.request = request;
             return this;
         }
 

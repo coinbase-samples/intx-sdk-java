@@ -17,27 +17,16 @@
 package com.coinbase.intx.model.portfolios;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetPortfolioDetailRequest extends CoinbaseGetRequest {
+public class GetPortfolioDetailRequest {
     private String portfolio;
 
     public GetPortfolioDetailRequest() {}
 
     private GetPortfolioDetailRequest(Builder builder) {
         this.portfolio = builder.portfolio;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/detail", this.getPortfolio());
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
     }
 
     public String getPortfolio() {

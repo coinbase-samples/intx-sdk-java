@@ -17,11 +17,12 @@
 package com.coinbase.intx.model.portfolios;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbasePostRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class SetPortfolioMarginOverrideRequest extends CoinbasePostRequest {
+public class SetPortfolioMarginOverrideRequest {
+    @JsonIgnore
     private String portfolioId;
     private String marginOverride;
 
@@ -30,11 +31,6 @@ public class SetPortfolioMarginOverrideRequest extends CoinbasePostRequest {
     private SetPortfolioMarginOverrideRequest(Builder builder) {
         this.portfolioId = builder.portfolioId;
         this.marginOverride = builder.marginOverride;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/portfolios/%s/margin-override", this.getPortfolioId());
     }
 
     public String getPortfolioId() {

@@ -16,12 +16,11 @@
 
 package com.coinbase.intx.model.transfers;
 
-import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class WithdrawToCryptoAddressRequest extends CoinbasePostRequest {
+public class WithdrawToCryptoAddressRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 
@@ -53,11 +52,6 @@ public class WithdrawToCryptoAddressRequest extends CoinbasePostRequest {
         this.networkArnId = builder.networkArnId;
         this.address = builder.address;
         this.nonce = builder.nonce;
-    }
-
-    @Override
-    public String getPath() {
-        return "/transfers/withdraw";
     }
 
     public static class Builder {

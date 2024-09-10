@@ -16,11 +16,14 @@
 
 package com.coinbase.examples;
 
-import com.coinbase.core.credentials.CoinbaseCredentials;
+import com.coinbase.intx.client.CoinbaseIntxClient;
+import com.coinbase.intx.credentials.CoinbaseIntxCredentials;
 import com.coinbase.intx.errors.CoinbaseIntxException;
+import com.coinbase.intx.factory.IntxServiceFactory;
 import com.coinbase.intx.model.portfolios.*;
+import com.coinbase.intx.portfolios.PortfoliosService;
+import com.coinbase.intx.portfolios.PortfoliosServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.coinbase.intx.client.CoinbaseIntxHttpClient;
 
 public class Main {
     public static void main(String[] args) throws CoinbaseIntxException {
@@ -28,12 +31,12 @@ public class Main {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            CoinbaseCredentials credentials = new CoinbaseCredentials(credsStringBlob);
-            CoinbaseIntxHttpClient client = new CoinbaseIntxHttpClient(credentials);
+            CoinbaseIntxCredentials credentials = new CoinbaseIntxCredentials(credsStringBlob);
+            CoinbaseIntxClient client = new CoinbaseIntxClient(credentials);
 
-            ListPortfoliosRequest listReq = new ListPortfoliosRequest.Builder()
-                    .build();
-            ListPortfoliosResponse listResponse = client.listPortfolios(listReq);
+            PortfoliosService portfoliosService = IntxServiceFactory.createPortfoliosService(client);
+
+            ListPortfoliosResponse listResponse = portfoliosService.listPortfolios();
             System.out.println("List Portfolios Response:");
             System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(listResponse));
 

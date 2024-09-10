@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package com.coinbase.intx.model.instruments;
+package com.coinbase.intx.assets;
 
-import com.coinbase.core.http.CoinbaseGetRequest;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.coinbase.intx.errors.CoinbaseIntxException;
+import com.coinbase.intx.model.assets.*;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class ListInstrumentsRequest extends CoinbaseGetRequest {
-    @Override
-    public String getPath() {
-        return "/instruments";
-    }
-
-    @Override
-    public String getQueryString() {
-        return "";
-    }
+public interface AssetsService {
+    ListAssetsResponse listAssets() throws CoinbaseIntxException;
+    GetAssetResponse getAsset(GetAssetRequest request) throws CoinbaseIntxException;
+    GetSupportedNetworksResponse getSupportedNetworks(GetSupportedNetworksRequest request) throws CoinbaseIntxException;
 }

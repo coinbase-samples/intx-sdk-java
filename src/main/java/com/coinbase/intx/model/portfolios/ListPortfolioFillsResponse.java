@@ -28,15 +28,11 @@ public class ListPortfolioFillsResponse {
     @JsonProperty("results")
     private List<Fill> results;
 
-    @JsonProperty("request")
-    private ListPortfolioFillsRequest request;
-
     public ListPortfolioFillsResponse() {}
 
     private ListPortfolioFillsResponse(Builder builder) {
         this.pagination = builder.pagination;
         this.results = builder.results;
-        this.request = builder.request;
     }
 
     public Pagination getPagination() {
@@ -55,18 +51,9 @@ public class ListPortfolioFillsResponse {
         this.results = results;
     }
 
-    public ListPortfolioFillsRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(ListPortfolioFillsRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Pagination pagination;
         private List<Fill> results;
-        private ListPortfolioFillsRequest request;
 
         public Builder() {}
 
@@ -77,11 +64,6 @@ public class ListPortfolioFillsResponse {
 
         public Builder results(List<Fill> results) {
             this.results = results;
-            return this;
-        }
-
-        public Builder request(ListPortfolioFillsRequest request) {
-            this.request = request;
             return this;
         }
 

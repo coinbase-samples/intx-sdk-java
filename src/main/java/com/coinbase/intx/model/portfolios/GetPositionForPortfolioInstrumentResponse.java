@@ -23,14 +23,10 @@ public class GetPositionForPortfolioInstrumentResponse {
     @JsonProperty("position")
     private PortfolioDetail.Position position;
 
-    @JsonProperty("request")
-    private GetPositionForPortfolioInstrumentRequest request;
-
     public GetPositionForPortfolioInstrumentResponse() {}
 
     private GetPositionForPortfolioInstrumentResponse(Builder builder) {
         this.position = builder.position;
-        this.request = builder.request;
     }
 
     public PortfolioDetail.Position getPosition() {
@@ -41,27 +37,13 @@ public class GetPositionForPortfolioInstrumentResponse {
         this.position = position;
     }
 
-    public GetPositionForPortfolioInstrumentRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(GetPositionForPortfolioInstrumentRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private PortfolioDetail.Position position;
-        private GetPositionForPortfolioInstrumentRequest request;
 
         public Builder() {}
 
         public Builder position(PortfolioDetail.Position position) {
             this.position = position;
-            return this;
-        }
-
-        public Builder request(GetPositionForPortfolioInstrumentRequest request) {
-            this.request = request;
             return this;
         }
 

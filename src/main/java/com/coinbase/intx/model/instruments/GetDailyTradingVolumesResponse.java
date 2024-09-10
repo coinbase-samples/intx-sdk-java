@@ -18,13 +18,11 @@ package com.coinbase.intx.model.instruments;
 
 public class GetDailyTradingVolumesResponse {
     private InstrumentDailyTradingVolumes dailyTradingVolumes;
-    private GetDailyTradingVolumesRequest request;
 
     public GetDailyTradingVolumesResponse() {}
 
     private GetDailyTradingVolumesResponse(Builder builder) {
         this.dailyTradingVolumes = builder.dailyTradingVolumes;
-        this.request = builder.request;
     }
 
     public InstrumentDailyTradingVolumes getDailyTradingVolumes() {
@@ -35,27 +33,13 @@ public class GetDailyTradingVolumesResponse {
         this.dailyTradingVolumes = dailyTradingVolumes;
     }
 
-    public GetDailyTradingVolumesRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(GetDailyTradingVolumesRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private InstrumentDailyTradingVolumes dailyTradingVolumes;
-        private GetDailyTradingVolumesRequest request;
 
         public Builder() {}
 
         public Builder dailyTradingVolumes(InstrumentDailyTradingVolumes dailyTradingVolumes) {
             this.dailyTradingVolumes = dailyTradingVolumes;
-            return this;
-        }
-
-        public Builder request(GetDailyTradingVolumesRequest request) {
-            this.request = request;
             return this;
         }
 

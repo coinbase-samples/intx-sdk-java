@@ -17,15 +17,16 @@
 package com.coinbase.intx.model.orders;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbasePutRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ModifyOrderRequest extends CoinbasePutRequest {
+public class ModifyOrderRequest {
     @JsonProperty("id")
+    @JsonIgnore
     private String id;
 
     @JsonProperty("portfolio")
@@ -52,11 +53,6 @@ public class ModifyOrderRequest extends CoinbasePutRequest {
         this.price = builder.price;
         this.stopPrice = builder.stopPrice;
         this.size = builder.size;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/orders/%s", this.getId());
     }
 
     public String getId() {

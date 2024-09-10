@@ -17,12 +17,12 @@
 package com.coinbase.intx.model.instruments;
 
 import com.coinbase.core.errors.CoinbaseClientException;
-import com.coinbase.core.http.CoinbaseGetRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import static com.coinbase.core.utils.Utils.appendQueryParams;
 import static com.coinbase.core.utils.Utils.isNullOrEmpty;
 
-public class GetAggregatedCandlesRequest extends CoinbaseGetRequest {
+public class GetAggregatedCandlesRequest {
+    @JsonIgnore
     private String instrument;
     private String granularity;
     private String start;
@@ -35,20 +35,6 @@ public class GetAggregatedCandlesRequest extends CoinbaseGetRequest {
         this.granularity = builder.granularity;
         this.start = builder.start;
         this.end = builder.end;
-    }
-
-    @Override
-    public String getPath() {
-        return String.format("/instruments/%s/candles", this.getInstrument());
-    }
-
-    @Override
-    public String getQueryString() {
-        String queryParams = appendQueryParams("", "instrument", instrument);
-        queryParams = appendQueryParams(queryParams, "granularity", granularity);
-        queryParams = appendQueryParams(queryParams, "start", start);
-        queryParams = appendQueryParams(queryParams, "end", end);
-        return queryParams;
     }
 
     public String getInstrument() {

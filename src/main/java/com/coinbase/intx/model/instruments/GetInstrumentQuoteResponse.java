@@ -19,13 +19,11 @@ package com.coinbase.intx.model.instruments;
 public class GetInstrumentQuoteResponse {
 
     private Quote quote;
-    private GetInstrumentQuoteRequest request;
 
     public GetInstrumentQuoteResponse() {}
 
     private GetInstrumentQuoteResponse(Builder builder) {
         this.quote = builder.quote;
-        this.request = builder.request;
     }
 
     public Quote getQuote() {
@@ -36,27 +34,13 @@ public class GetInstrumentQuoteResponse {
         this.quote = quote;
     }
 
-    public GetInstrumentQuoteRequest getRequest() {
-        return request;
-    }
-
-    public void setRequest(GetInstrumentQuoteRequest request) {
-        this.request = request;
-    }
-
     public static class Builder {
         private Quote quote;
-        private GetInstrumentQuoteRequest request;
 
         public Builder() {}
 
         public Builder quote(Quote quote) {
             this.quote = quote;
-            return this;
-        }
-
-        public Builder request(GetInstrumentQuoteRequest request) {
-            this.request = request;
             return this;
         }
 

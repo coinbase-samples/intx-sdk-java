@@ -18,18 +18,7 @@ package com.coinbase.intx.utils;
 
 public class Constants {
     public static final String BASE_URL = "https://api.international.coinbase.com/api/v1";
-    public static final String ACCESS_KEY_HEADER = "CB-ACCESS-KEY";
-    public static final String PASSPHRASE_HEADER = "CB-ACCESS-PASSPHRASE";
-    public static final String SIGNATURE_HEADER = "CB-ACCESS-SIGN";
-    public static final String TIMESTAMP_HEADER = "CB-ACCESS-TIMESTAMP";
-    public static final String CONTENT_TYPE_HEADER = "Content-Type";
-    public static final String CONTENT_TYPE_JSON = "application/json";
-
-    public static final String GET = "GET";
-    public static final String POST = "POST";
-    public static final String PUT = "PUT";
-    public static final String DELETE = "DELETE";
-    public static final String PATCH = "PATCH";
+    public static final String SDK_VERSION = "1.0.0";
 
     public static final String HMAC_SHA256 = "HmacSHA256";
 }

@@ -16,12 +16,11 @@
 
 package com.coinbase.intx.model.orders;
 
-import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreateOrderRequest extends CoinbasePostRequest {
+public class CreateOrderRequest {
     @JsonProperty("client_order_id")
     private String clientOrderId;
 
@@ -81,11 +80,6 @@ public class CreateOrderRequest extends CoinbasePostRequest {
         this.user = builder.user;
         this.stpMode = builder.stpMode;
         this.postOnly = builder.postOnly;
-    }
-
-    @Override
-    public String getPath() {
-        return "/orders";
     }
 
     public static class Builder {

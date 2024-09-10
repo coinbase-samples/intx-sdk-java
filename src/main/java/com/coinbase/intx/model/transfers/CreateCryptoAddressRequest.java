@@ -16,12 +16,11 @@
 
 package com.coinbase.intx.model.transfers;
 
-import com.coinbase.core.http.CoinbasePostRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CreateCryptoAddressRequest extends CoinbasePostRequest {
+public class CreateCryptoAddressRequest {
     @JsonProperty("portfolio")
     private String portfolio;
 
@@ -37,11 +36,6 @@ public class CreateCryptoAddressRequest extends CoinbasePostRequest {
         this.portfolio = builder.portfolio;
         this.asset = builder.asset;
         this.networkArnId = builder.networkArnId;
-    }
-
-    @Override
-    public String getPath() {
-        return "/transfers/address";
     }
 
     public String getPortfolio() {
