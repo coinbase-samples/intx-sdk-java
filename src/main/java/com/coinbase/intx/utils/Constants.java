@@ -18,7 +18,7 @@ package com.coinbase.intx.utils;
 
 public class Constants {
     public static final String BASE_URL = "https://api.international.coinbase.com/api/v1";
-    public static final String SDK_VERSION = "0.1.2";
+    public static final String SDK_VERSION = "1.0.0";
 
     public static final String HMAC_SHA256 = "HmacSHA256";
 }

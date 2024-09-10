@@ -19,6 +19,7 @@ package com.coinbase.examples;
 import com.coinbase.intx.client.CoinbaseIntxClient;
 import com.coinbase.intx.credentials.CoinbaseIntxCredentials;
 import com.coinbase.intx.errors.CoinbaseIntxException;
+import com.coinbase.intx.factory.IntxServiceFactory;
 import com.coinbase.intx.model.portfolios.*;
 import com.coinbase.intx.portfolios.PortfoliosService;
 import com.coinbase.intx.portfolios.PortfoliosServiceImpl;
@@ -33,7 +34,7 @@ public class Main {
             CoinbaseIntxCredentials credentials = new CoinbaseIntxCredentials(credsStringBlob);
             CoinbaseIntxClient client = new CoinbaseIntxClient(credentials);
 
-            PortfoliosService portfoliosService = new PortfoliosServiceImpl(client);
+            PortfoliosService portfoliosService = IntxServiceFactory.createPortfoliosService(client);
 
             ListPortfoliosResponse listResponse = portfoliosService.listPortfolios();
             System.out.println("List Portfolios Response:");
